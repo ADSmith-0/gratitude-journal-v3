@@ -1,9 +1,12 @@
 
 import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const AccountScreen = () => {
   return (
-    <Text>Account</Text>
+    <SafeAreaView>
+      <Text>Account</Text>
+    </SafeAreaView>
   )
 }
 
