@@ -3,8 +3,8 @@ import AddScreen from "./src/screens/AddScreen";
 import EntriesScreen from "./src/screens/EntriesScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { PlusCircle, List, User2 } from "lucide-react-native";
-import colours from "./src/colours";
+import { Plus, List, User2 } from "lucide-react-native";
+import { colours, fontSize, spacing } from "./src/styles";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
@@ -16,22 +16,22 @@ const App = () => {
 				<Tab.Navigator
 					screenOptions={{
 						tabBarActiveTintColor: colours.grey[100],
-            tabBarHideOnKeyboard: true,
+						tabBarHideOnKeyboard: true,
 						tabBarActiveBackgroundColor: colours.grey[800],
 						tabBarStyle: {
 							height: 75,
 						},
 						tabBarItemStyle: {
-							borderRadius: 10,
-							marginVertical: 5,
-							marginHorizontal: 10,
+							borderRadius: spacing[4],
+							marginVertical: spacing[2],
+							marginHorizontal: spacing[4],
 						},
 						tabBarIconStyle: {
-							marginTop: 7,
+							marginTop: spacing[3],
 						},
 						tabBarLabelStyle: {
-							fontSize: 15, // TODO Fix later
-							paddingBottom: 10,
+							fontSize: fontSize.s,
+							paddingBottom: spacing[3],
 						},
 					}}
 				>
@@ -40,7 +40,7 @@ const App = () => {
 						component={AddScreen}
 						options={{
 							tabBarIcon: ({ color, size }) => (
-								<PlusCircle color={color} size={size / 1.2} />
+								<Plus color={color} size={size / 1.2} />
 							),
 						}}
 					/>
