@@ -1,10 +1,12 @@
-import { Text } from "react-native";
+import { TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Calendar from "../components/Calendar";
 
 const AddScreen = () => {
   return (
     <SafeAreaView>
-      <Text>Add</Text>
+      <Calendar />
+      <TextInput editable multiline numberOfLines={4} style={{ borderWidth: 1 }} />
     </SafeAreaView>
   )
 }
