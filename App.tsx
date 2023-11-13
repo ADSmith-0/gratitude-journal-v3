@@ -14,9 +14,15 @@ const App = () => {
 			<Tab.Navigator
 				screenOptions={{
 					tabBarActiveTintColor: colours.grey[100],
+          tabBarActiveBackgroundColor: colours.grey[800],
 					tabBarStyle: {
 						height: 75,
 					},
+          tabBarItemStyle: {
+            borderRadius: 10,
+            marginVertical: 5,
+            marginHorizontal: 10,
+          },
 					tabBarIconStyle: {
 						marginTop: 7,
 					},
