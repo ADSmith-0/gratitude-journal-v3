@@ -16,6 +16,7 @@ const App = () => {
 				<Tab.Navigator
 					screenOptions={{
 						tabBarActiveTintColor: colours.grey[100],
+            tabBarHideOnKeyboard: true,
 						tabBarActiveBackgroundColor: colours.grey[800],
 						tabBarStyle: {
 							height: 75,
