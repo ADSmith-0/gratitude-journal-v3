@@ -1,118 +1,61 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import AccountScreen from "./src/screens/AccountScreen";
+import AddScreen from "./src/screens/AddScreen";
+import EntriesScreen from "./src/screens/EntriesScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { PlusCircle, List, User2 } from "lucide-react-native";
+import colours from "./src/colours";
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const Tab = createBottomTabNavigator();
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const App = () => {
+	return (
+		<NavigationContainer>
+			<Tab.Navigator
+				screenOptions={{
+					tabBarActiveTintColor: colours.grey[100],
+					tabBarStyle: {
+						height: 75,
+					},
+					tabBarIconStyle: {
+						marginTop: 7,
+					},
+					tabBarLabelStyle: {
+						fontSize: 15, // TODO Fix later
+						paddingBottom: 10,
+					},
+				}}
+			>
+				<Tab.Screen
+					name="Add"
+					component={AddScreen}
+					options={{
+						tabBarIcon: ({ color, size }) => (
+							<PlusCircle color={color} size={size / 1.2} />
+						),
+					}}
+				/>
+				<Tab.Screen
+					name="Entries"
+					component={EntriesScreen}
+					options={{
+						tabBarIcon: ({ color, size }) => (
+							<List color={color} size={size / 1.1} />
+						),
+					}}
+				/>
+				<Tab.Screen
+					name="Account"
+					component={AccountScreen}
+					options={{
+						tabBarIcon: ({ color, size }) => (
+							<User2 color={color} size={size / 1.1} />
+						),
+					}}
+				/>
+			</Tab.Navigator>
+		</NavigationContainer>
+	);
+};
 
 export default App;
