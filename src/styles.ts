@@ -1,4 +1,6 @@
-const colours = {
+import { StyleSheet } from "react-native";
+
+export const colours = {
 	grey: {
 		"100": "hsl(0 1% 20%)",
 		"200": "hsl(0 2% 30%)",
@@ -12,18 +14,92 @@ const colours = {
 	},
 };
 
-const fontSize = {
+export const fontSize = {
 	s: 14,
 	m: 16,
 	l: 20,
 	xl: 24,
 };
 
-const spacing = {
+export const spacing = {
 	1: 2,
 	2: 4,
 	3: 8,
 	4: 12,
 	5: 16,
+	6: 20,
+	7: 24,
+	8: 32,
+	9: 40,
+	10: 48,
 };
-export { colours, fontSize, spacing };
+
+export const styles = StyleSheet.create({
+	flex_row: { display: "flex", flexDirection: "row" },
+	flex_column: { display: "flex", flexDirection: "column" },
+	flex_1: { flex: 1 },
+	align_items_center: { alignItems: "center" },
+  br_1: { borderRadius: 5, borderColor: colours.grey[100], borderWidth: 1 },
+	fs_s: { fontSize: fontSize.s },
+	fs_m: { fontSize: fontSize.m },
+	fs_l: { fontSize: fontSize.l },
+	fs_xl: { fontSize: fontSize.xl },
+	p_1: { padding: spacing[1] },
+	p_2: { padding: spacing[2] },
+	p_3: { padding: spacing[3] },
+	p_4: { padding: spacing[4] },
+	p_5: { padding: spacing[5] },
+	p_6: { padding: spacing[6] },
+	p_7: { padding: spacing[7] },
+	p_8: { padding: spacing[8] },
+	p_9: { padding: spacing[9] },
+	p_10: { padding: spacing[10] },
+	pl_1: { paddingLeft: spacing[1] },
+	pl_2: { paddingLeft: spacing[2] },
+	pl_3: { paddingLeft: spacing[3] },
+	pl_4: { paddingLeft: spacing[4] },
+	pl_5: { paddingLeft: spacing[5] },
+	pl_6: { paddingLeft: spacing[6] },
+	pl_7: { paddingLeft: spacing[7] },
+	pl_8: { paddingLeft: spacing[8] },
+	pl_9: { paddingLeft: spacing[9] },
+	pl_10: { paddingLeft: spacing[10] },
+	m_1: { margin: spacing[1] },
+	m_2: { margin: spacing[2] },
+	m_3: { margin: spacing[3] },
+	m_4: { margin: spacing[4] },
+	m_5: { margin: spacing[5] },
+	m_6: { margin: spacing[6] },
+	m_7: { margin: spacing[7] },
+	m_8: { margin: spacing[8] },
+	m_9: { margin: spacing[9] },
+	m_10: { marginVertical: spacing[10] },
+	mv_1: { marginVertical: spacing[1] },
+	mv_2: { marginVertical: spacing[2] },
+	mv_3: { marginVertical: spacing[3] },
+	mv_4: { marginVertical: spacing[4] },
+	mv_5: { marginVertical: spacing[5] },
+	mv_6: { marginVertical: spacing[6] },
+	mv_7: { marginVertical: spacing[7] },
+	mv_8: { marginVertical: spacing[8] },
+	mv_9: { marginVertical: spacing[9] },
+	mv_10: { marginVertical: spacing[10] },
+	text_grey_100: { color: colours.grey[100] },
+	text_grey_200: { color: colours.grey[200] },
+	text_grey_300: { color: colours.grey[300] },
+	text_grey_400: { color: colours.grey[400] },
+	text_grey_500: { color: colours.grey[500] },
+	text_grey_600: { color: colours.grey[600] },
+	text_grey_700: { color: colours.grey[700] },
+	text_grey_800: { color: colours.grey[800] },
+	text_grey_900: { color: colours.grey[900] },
+	bg_grey_100: { backgroundColor: colours.grey[100] },
+	bg_grey_200: { backgroundColor: colours.grey[200] },
+	bg_grey_300: { backgroundColor: colours.grey[300] },
+	bg_grey_400: { backgroundColor: colours.grey[400] },
+	bg_grey_500: { backgroundColor: colours.grey[500] },
+	bg_grey_600: { backgroundColor: colours.grey[600] },
+	bg_grey_700: { backgroundColor: colours.grey[700] },
+	bg_grey_800: { backgroundColor: colours.grey[800] },
+	bg_grey_900: { backgroundColor: colours.grey[900] },
+});
