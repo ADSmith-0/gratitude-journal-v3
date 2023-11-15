@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { List, Plus, User2 } from "lucide-react-native";
@@ -40,7 +41,8 @@ const App = () => (
             tabBarIcon: ({ color, size }) => (
               <Plus color={color} size={size / 1.2} />
             ),
-          }} />
+          }}
+        />
         <Tab.Screen
           name="Entries"
           component={EntriesScreen}
@@ -48,7 +50,8 @@ const App = () => (
             tabBarIcon: ({ color, size }) => (
               <List color={color} size={size / 1.1} />
             ),
-          }} />
+          }}
+        />
         <Tab.Screen
           name="Account"
           component={AccountScreen}
@@ -56,7 +59,8 @@ const App = () => (
             tabBarIcon: ({ color, size }) => (
               <User2 color={color} size={size / 1.1} />
             ),
-          }} />
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   </SafeAreaProvider>

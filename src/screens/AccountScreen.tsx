@@ -6,7 +6,7 @@ const AccountScreen = () => {
     <SafeAreaView>
       <Text>Account</Text>
     </SafeAreaView>
-    );
+  );
 };
 
 export default AccountScreen;

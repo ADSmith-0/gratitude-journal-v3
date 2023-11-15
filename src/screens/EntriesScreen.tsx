@@ -6,7 +6,7 @@ const EntriesScreen = () => {
     <SafeAreaView>
       <Text>Entries</Text>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default EntriesScreen;

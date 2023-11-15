@@ -1,4 +1,10 @@
-import { Pressable, PressableProps, StyleProp, Text, ViewStyle } from "react-native";
+import {
+  Pressable,
+  PressableProps,
+  StyleProp,
+  Text,
+  ViewStyle,
+} from "react-native";
 
 type Props = {
   title: string;
@@ -23,7 +29,7 @@ const Button = ({ title, variant = "primary", style, ...props }: Props) => {
     <Pressable style={[variantStyle, style]} {...props}>
       <Text>{title}</Text>
     </Pressable>
-  )
-}
+  );
+};
 
 export default Button;

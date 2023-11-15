@@ -8,37 +8,37 @@ import DateFormatter from "../utils/DateFormatter";
 const { flex_column, ph_10, pl_3 } = styles;
 
 const AddScreen = () => {
-	const [date, setDate] = useState<string>(
-		new DateFormatter().toReadableDate(),
-	);
+  const [date, setDate] = useState<string>(
+    new DateFormatter().toReadableDate(),
+  );
 
-	const calendarOnTouch = () => {
-		// TODO calendar input onClick
-		console.log("hello");
-	};
+  const calendarOnTouch = () => {
+    // TODO calendar input onClick
+    console.log("hello");
+  };
 
-	return (
-		<SafeAreaView style={[flex_column, ph_10]}>
-			<Input
-				label="Selected Date"
-				icon={<CalendarDays color={colours.grey[100]} size={fontSize.l} />}
-				editable={false}
-				value={date}
-				onTouchStart={calendarOnTouch}
-			/>
-			<Input
-				label="Entry"
-				editable
-				multiline
-				numberOfLines={10}
-				textAlignVertical="top"
-				placeholder="Today I'm grateful for..."
-				placeholderTextColor={colours.grey[700]}
-				style={[pl_3]}
-			/>
-			<Button title="Submit" onPress={() => console.log("working")} />
-		</SafeAreaView>
-	);
+  return (
+    <SafeAreaView style={[flex_column, ph_10]}>
+      <Input
+        label="Selected Date"
+        icon={<CalendarDays color={colours.grey[100]} size={fontSize.l} />}
+        editable={false}
+        value={date}
+        onTouchStart={calendarOnTouch}
+      />
+      <Input
+        label="Entry"
+        editable
+        multiline
+        numberOfLines={10}
+        textAlignVertical="top"
+        placeholder="Today I'm grateful for..."
+        placeholderTextColor={colours.grey[700]}
+        style={[pl_3]}
+      />
+      <Button title="Submit" onPress={() => console.log("working")} />
+    </SafeAreaView>
+  );
 };
 
 export default AddScreen;
