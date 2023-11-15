@@ -1,20 +1,42 @@
-import { TextInput } from "react-native";
+import { CalendarDays } from "lucide-react-native";
+import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CalendarInput from "../components/Calendar/CalendarInput";
-import { spacing } from "../styles";
+import Button from "../components/UI/Button";
+import Input from "../components/UI/Input";
+import { colours, fontSize, styles } from "../styles";
+import DateFormatter from "../utils/DateFormatter";
+const { flex_column, ph_10, pl_3 } = styles;
 
 const AddScreen = () => {
+	const [date, setDate] = useState<string>(
+		new DateFormatter().toReadableDate(),
+	);
+
+	const calendarOnTouch = () => {
+		// TODO calendar input onClick
+		console.log("hello");
+	};
+
 	return (
-		<SafeAreaView
-			style={{ display: "flex", flexDirection: "column", paddingHorizontal: spacing[10] }}
-		>
-      <CalendarInput />
-			<TextInput
+		<SafeAreaView style={[flex_column, ph_10]}>
+			<Input
+				label="Selected Date"
+				icon={<CalendarDays color={colours.grey[100]} size={fontSize.l} />}
+				editable={false}
+				value={date}
+				onTouchStart={calendarOnTouch}
+			/>
+			<Input
+				label="Entry"
 				editable
 				multiline
-				numberOfLines={4}
-				style={{ borderWidth: 1 }}
+				numberOfLines={10}
+				textAlignVertical="top"
+				placeholder="Today I'm grateful for..."
+				placeholderTextColor={colours.grey[700]}
+				style={[pl_3]}
 			/>
+			<Button title="Submit" onPress={() => console.log("working")} />
 		</SafeAreaView>
 	);
 };
