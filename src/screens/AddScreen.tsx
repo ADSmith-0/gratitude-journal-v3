@@ -34,7 +34,7 @@ const AddScreen = () => {
         textAlignVertical="top"
         placeholder="Today I'm grateful for..."
         placeholderTextColor={colours.grey[700]}
-        style={[pl_3]}
+        style={pl_3}
       />
       <Button title="Submit" onPress={() => console.log("working")} />
     </SafeAreaView>
