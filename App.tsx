@@ -14,6 +14,9 @@ const App = () => (
   <SafeAreaProvider>
     <NavigationContainer>
       <Tab.Navigator
+        sceneContainerStyle={{
+          backgroundColor: colours.grey[900],
+        }}
         screenOptions={{
           tabBarActiveTintColor: colours.grey[100],
           tabBarHideOnKeyboard: true,
