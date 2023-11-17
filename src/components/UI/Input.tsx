@@ -3,11 +3,11 @@ import { TextInput, TextInputProps, View } from "react-native";
 import { styles } from "../../styles";
 import Label from "./Label";
 const {
-  align_items_center,
-  br_1,
   bg_grey_900,
+  border_1,
+  br_1,
   flex_1,
-  flex_row,
+  flex_row_center,
   fs_m,
   mb_4,
   mt_8,
@@ -27,9 +27,9 @@ const Input = ({ icon, label, onTouchStart, style, ...props }: Props) => (
     {icon ? (
       <View
         style={[
-          flex_row,
-          align_items_center,
+          flex_row_center,
           bg_grey_900,
+          border_1,
           br_1,
           mb_4,
           pl_4,
@@ -42,7 +42,7 @@ const Input = ({ icon, label, onTouchStart, style, ...props }: Props) => (
       </View>
     ) : (
       <TextInput
-        style={[bg_grey_900, text_grey_100, fs_m, br_1, style]}
+        style={[bg_grey_900, text_grey_100, fs_m, border_1, br_1, style]}
         {...props}
       />
     )}
