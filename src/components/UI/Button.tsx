@@ -9,8 +9,10 @@ import {
 import { styles } from "../../styles";
 const {
   align_self_end,
+  bg_grey_200,
   bg_grey_300,
-  bg_grey_600,
+  bg_grey_700,
+  bg_grey_800,
   bg_transparent,
   br_1,
   flex_row_center,
@@ -19,8 +21,9 @@ const {
   mt_8,
   pv_5,
   ph_3,
-  text_grey_900,
   text_grey_100,
+  text_grey_500,
+  text_grey_900,
   w_3,
 } = styles;
 
@@ -38,23 +41,42 @@ const Button = ({
   textStyle,
   ...props
 }: Props) => {
-  let variantButtonStyle: StyleProp<ViewStyle> | undefined;
-  let variantTextStyle: StyleProp<TextStyle> | undefined;
+  const variantButtonStyle: Record<
+    "normal" | "pressed",
+    StyleProp<ViewStyle> | undefined
+  > = {
+    normal: undefined,
+    pressed: undefined,
+  };
+
+  const variantTextStyle: Record<
+    "normal" | "pressed",
+    StyleProp<TextStyle> | undefined
+  > = {
+    normal: undefined,
+    pressed: undefined,
+  };
 
   if (variant === "primary") {
-    variantButtonStyle = [bg_grey_300];
-    variantTextStyle = [text_grey_900];
+    variantButtonStyle.normal = [bg_grey_300];
+    variantButtonStyle.pressed = [bg_grey_200];
+    variantTextStyle.normal = [text_grey_900];
+    variantTextStyle.pressed = [text_grey_900];
   } else if (variant === "secondary") {
-    variantButtonStyle = [bg_grey_600];
-    variantTextStyle = [text_grey_100];
+    variantButtonStyle.normal = [bg_grey_700];
+    variantButtonStyle.pressed = [bg_grey_800];
+    variantTextStyle.normal = [text_grey_100];
+    variantTextStyle.pressed = [text_grey_100];
   } else if (variant === "tertiary") {
-    variantButtonStyle = [bg_transparent];
-    variantTextStyle = [text_grey_100];
+    variantButtonStyle.normal = [bg_transparent];
+    variantButtonStyle.pressed = [bg_transparent];
+    variantTextStyle.normal = [text_grey_100];
+    variantTextStyle.pressed = [text_grey_500];
   }
 
   return (
     <Pressable
-      style={[
+      style={({ pressed }) => [
         w_3,
         flex_row_center,
         justify_content_center,
@@ -63,11 +85,20 @@ const Button = ({
         ph_3,
         mt_8,
         br_1,
-        variantButtonStyle,
+        pressed ? variantButtonStyle.pressed : variantButtonStyle.normal,
         buttonStyle,
       ]}
       {...props}>
-      <Text style={[fs_m, variantTextStyle, textStyle]}>{title}</Text>
+      {({ pressed }) => (
+        <Text
+          style={[
+            fs_m,
+            pressed ? variantTextStyle.pressed : variantTextStyle.normal,
+            textStyle,
+          ]}>
+          {title}
+        </Text>
+      )}
     </Pressable>
   );
 };
