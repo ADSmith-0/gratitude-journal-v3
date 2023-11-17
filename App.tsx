@@ -6,7 +6,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import AccountScreen from "./src/screens/AccountScreen";
 import AddScreen from "./src/screens/AddScreen";
 import EntriesScreen from "./src/screens/EntriesScreen";
-import { colours, fontSize, spacing } from "./src/styles";
+import { colours, dimensions, fontSize, spacing } from "./src/styles";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ const App = () => (
           tabBarHideOnKeyboard: true,
           tabBarActiveBackgroundColor: colours.grey[800],
           tabBarStyle: {
-            height: 75,
+            height: dimensions[2],
           },
           tabBarItemStyle: {
             borderRadius: spacing[4],
