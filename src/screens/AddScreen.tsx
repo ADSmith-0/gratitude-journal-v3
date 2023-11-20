@@ -1,12 +1,11 @@
 import { CalendarDays } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
-import { useStorage } from "../hooks/useStorage";
 import { colours, fontSize, styles } from "../styles";
-import { Entry } from "../types";
 import DateFormatter from "../utils/DateFormatter";
+import EntriesStorage from "../utils/EntriesStorage";
 const { flex_column, ph_10, pl_3 } = styles;
 
 const AddScreen = () => {
@@ -14,9 +13,12 @@ const AddScreen = () => {
     new DateFormatter().toReadableDate(),
   );
 
+  const [defaultEntry, setDefaultEntry] = useState<string>();
   const [entry, setEntry] = useState<string>();
 
-  const [entries, setEntries] = useStorage("entries", {} as Entry);
+  useEffect(() => {
+    setDefaultEntry(EntriesStorage.get(date));
+  }, [date]);
 
   const calendarOnTouch = () => {
     // TODO calendar input onClick
@@ -41,21 +43,14 @@ const AddScreen = () => {
         placeholder="Today I'm grateful for..."
         placeholderTextColor={colours.grey[700]}
         style={pl_3}
-        defaultValue={entries[date]}
+        defaultValue={defaultEntry}
         value={entry}
         onChangeText={text => setEntry(text)}
       />
       <Button
         title="Submit"
-        onPress={() =>
-          setEntries(
-            prevEntries =>
-              ({
-                ...prevEntries,
-                [date]: entry,
-              } as Entry),
-          )
-        }
+        disabled={defaultEntry === entry || entry === ""}
+        onPress={() => EntriesStorage.set(date, entry as string)}
       />
     </SafeAreaView>
   );

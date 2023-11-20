@@ -1,1 +1,1 @@
-export type Entry = { [date: string]: string };
+export type Entries = { [date: string]: string };
