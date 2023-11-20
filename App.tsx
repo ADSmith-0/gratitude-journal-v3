@@ -18,9 +18,9 @@ const App = () => (
           backgroundColor: colours.grey[900],
         }}
         screenOptions={{
-          tabBarActiveTintColor: colours.grey[100],
+          tabBarActiveTintColor: colours.primary[100],
           tabBarHideOnKeyboard: true,
-          tabBarActiveBackgroundColor: colours.grey[800],
+          tabBarActiveBackgroundColor: colours.primary[800],
           tabBarStyle: {
             height: dimensions[2],
           },

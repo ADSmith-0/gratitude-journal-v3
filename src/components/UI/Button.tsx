@@ -9,10 +9,10 @@ import {
 import { styles } from "../../styles";
 const {
   align_self_end,
-  bg_grey_200,
-  bg_grey_300,
-  bg_grey_700,
-  bg_grey_800,
+  bg_primary_200,
+  bg_primary_300,
+  bg_primary_700,
+  bg_primary_800,
   bg_transparent,
   br_1,
   flex_row_center,
@@ -21,9 +21,9 @@ const {
   mt_8,
   pv_5,
   ph_3,
-  text_grey_100,
-  text_grey_500,
   text_grey_900,
+  text_primary_100,
+  text_primary_500,
   w_3,
 } = styles;
 
@@ -58,20 +58,20 @@ const Button = ({
   };
 
   if (variant === "primary") {
-    variantButtonStyle.normal = [bg_grey_300];
-    variantButtonStyle.pressed = [bg_grey_200];
+    variantButtonStyle.normal = [bg_primary_300];
+    variantButtonStyle.pressed = [bg_primary_200];
     variantTextStyle.normal = [text_grey_900];
     variantTextStyle.pressed = [text_grey_900];
   } else if (variant === "secondary") {
-    variantButtonStyle.normal = [bg_grey_700];
-    variantButtonStyle.pressed = [bg_grey_800];
-    variantTextStyle.normal = [text_grey_100];
-    variantTextStyle.pressed = [text_grey_100];
+    variantButtonStyle.normal = [bg_primary_700];
+    variantButtonStyle.pressed = [bg_primary_800];
+    variantTextStyle.normal = [text_primary_100];
+    variantTextStyle.pressed = [text_primary_100];
   } else if (variant === "tertiary") {
     variantButtonStyle.normal = [bg_transparent];
     variantButtonStyle.pressed = [bg_transparent];
-    variantTextStyle.normal = [text_grey_100];
-    variantTextStyle.pressed = [text_grey_500];
+    variantTextStyle.normal = [text_primary_100];
+    variantTextStyle.pressed = [text_primary_500];
   }
 
   return (
