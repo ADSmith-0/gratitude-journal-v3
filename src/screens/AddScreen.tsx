@@ -1,17 +1,15 @@
 import { CalendarDays } from "lucide-react-native";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
+import { DateContext } from "../context/DateContext";
 import { colours, fontSize, styles } from "../styles";
-import DateFormatter from "../utils/DateFormatter";
 import EntriesStorage from "../utils/EntriesStorage";
 const { flex_column, ph_10, pl_3 } = styles;
 
 const AddScreen = () => {
-  const [date, setDate] = useState<string>(
-    new DateFormatter().toReadableDate(),
-  );
+  const { date } = useContext(DateContext);
 
   const [defaultEntry, setDefaultEntry] = useState<string>();
   const [entry, setEntry] = useState<string>();
