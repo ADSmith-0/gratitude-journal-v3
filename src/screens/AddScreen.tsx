@@ -49,7 +49,7 @@ const AddScreen = () => {
       />
       <Button
         title="Submit"
-        disabled={defaultEntry === entry || entry === ""}
+        disabled={defaultEntry === entry || entry === ""} // TODO change to error instead of disable
         onPress={() => EntriesStorage.set(date, entry as string)}
       />
     </SafeAreaView>
