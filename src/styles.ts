@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const colours = {
+  white: "hsl(0 0% 100%)",
   grey: {
     "100": "hsl(0 1% 20%)",
     "200": "hsl(0 2% 30%)",
@@ -199,6 +200,7 @@ export const styles = StyleSheet.create({
   text_grey_700: { color: colours.grey[700] },
   text_grey_800: { color: colours.grey[800] },
   text_grey_900: { color: colours.grey[900] },
+  bg_white: { backgroundColor: colours.white },
   bg_primary_100: { backgroundColor: colours.primary[100] },
   bg_primary_200: { backgroundColor: colours.primary[200] },
   bg_primary_300: { backgroundColor: colours.primary[300] },
