@@ -26,11 +26,6 @@ const App = () => (
             tabBarStyle: {
               height: dimensions[2],
             },
-            tabBarItemStyle: {
-              borderRadius: spacing[4],
-              marginVertical: spacing[2],
-              marginHorizontal: spacing[4],
-            },
             tabBarIconStyle: {
               marginTop: spacing[3],
             },
