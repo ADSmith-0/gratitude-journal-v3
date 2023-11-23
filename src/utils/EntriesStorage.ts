@@ -1,8 +1,21 @@
 import { Entries } from "../types";
 import MMKV from "./MMKV";
 
-const EntriesStorage = {
-  entriesKey: "entries",
+class EntriesStorage {
+  private entriesKey = "entries";
+
+  constructor() {
+    MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      if (entries === null) {
+        MMKV.setMap(this.entriesKey, {});
+      }
+    });
+  }
 
   set(key: string, value: string) {
     MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
@@ -15,7 +28,7 @@ const EntriesStorage = {
 
       MMKV.setMap(this.entriesKey, entries);
     });
-  },
+  }
 
   get(key: string): string | undefined {
     const entries: Entries = MMKV.getMap<Entries>(this.entriesKey);
@@ -25,7 +38,7 @@ const EntriesStorage = {
     }
 
     return undefined;
-  },
+  }
 
   getAll(): Entries {
     return MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
@@ -36,7 +49,7 @@ const EntriesStorage = {
 
       return entries;
     });
-  },
+  }
 
   remove(key: string) {
     MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
@@ -49,7 +62,9 @@ const EntriesStorage = {
 
       MMKV.setMap(this.entriesKey, entries);
     });
-  },
-};
+  }
+}
 
-export default EntriesStorage;
+const EntriesStorageInstace = new EntriesStorage();
+
+export default EntriesStorageInstace;
