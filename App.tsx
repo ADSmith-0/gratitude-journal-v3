@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { List, Plus, User2 } from "lucide-react-native";
+import { CalendarDays, List, Plus, User2 } from "lucide-react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import DateContextProvider from "./src/context/DateContext/DateContextProvider";
 import AccountScreen from "./src/screens/AccountScreen";
 import AddScreen from "./src/screens/AddScreen";
+import CalendarScreen from "./src/screens/CalendarScreen";
 import EntriesScreen from "./src/screens/EntriesScreen";
 import { colours, dimensions, fontSize, spacing } from "./src/styles";
 
@@ -39,7 +40,16 @@ const App = () => (
             component={AddScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <Plus color={color} size={size / 1.2} />
+                <Plus color={color} size={size / 1.3} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Calendar"
+            component={CalendarScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <CalendarDays color={color} size={size / 1.2} />
               ),
             }}
           />
