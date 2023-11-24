@@ -32,7 +32,7 @@ const App = () => (
             },
             tabBarLabelStyle: {
               fontSize: fontSize.s,
-              paddingBottom: spacing[3],
+              paddingBottom: spacing[5],
             },
           }}>
           <Tab.Screen
@@ -58,7 +58,7 @@ const App = () => (
             component={EntriesScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <List color={color} size={size / 1.1} />
+                <List color={color} size={size / 1.2} />
               ),
             }}
           />
@@ -67,7 +67,7 @@ const App = () => (
             component={AccountScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <User2 color={color} size={size / 1.1} />
+                <User2 color={color} size={size / 1.2} />
               ),
             }}
           />
