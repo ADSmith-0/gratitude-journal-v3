@@ -6,7 +6,7 @@ import Input from "../components/UI/Input";
 import { DateContext } from "../context/DateContext/DateContext";
 import { colours, fontSize, styles } from "../styles";
 import EntriesStorage from "../utils/EntriesStorage";
-const { flex_column, ph_10, pl_3 } = styles;
+const { flex_column, mt_10, ph_10, pl_3 } = styles;
 
 const AddScreen = () => {
   const { date } = useContext(DateContext);
@@ -49,6 +49,7 @@ const AddScreen = () => {
         title="Submit"
         disabled={defaultEntry === entry || entry === ""} // TODO change to error instead of disable
         onPress={() => EntriesStorage.set(date, entry as string)}
+        buttonStyle={mt_10}
       />
     </SafeAreaView>
   );
