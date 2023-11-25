@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { TextInput, TextInputProps, View } from "react-native";
 import { styles } from "../../styles";
-import Label from "./Label";
+import Text from "./Text";
 const {
   bg_white,
   border_1,
@@ -9,6 +9,7 @@ const {
   flex_1,
   flex_row_center,
   fs_m,
+  mb_3,
   mb_4,
   mt_8,
   pl_4,
@@ -23,7 +24,7 @@ type Props = {
 
 const Input = ({ icon, label, onTouchStart, style, ...props }: Props) => (
   <View style={[mt_8]}>
-    {label && <Label>{label}</Label>}
+    {label && <Text style={mb_3}>{label}</Text>}
     {icon ? (
       <View
         style={[

@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { useContext } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import Text from "../UI/Text";
 import { DateContext } from "../../context/DateContext/DateContext";
 import { styles } from "../../styles";
 const {
