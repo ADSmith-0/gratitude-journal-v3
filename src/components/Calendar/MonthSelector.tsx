@@ -6,9 +6,12 @@ import { DateContext } from "../../context/DateContext/DateContext";
 import { styles } from "../../styles";
 const {
   align_items_center,
-  flex_row_center,
+  flex_1,
   flex_column_center,
+  flex_row_center,
   justify_content_center,
+  m_5,
+  mt_3,
 } = styles;
 import DateProcessor from "../../utils/DateProcessor";
 import Button from "../UI/Button";
@@ -24,9 +27,13 @@ const MonthSelector = () => {
         variant="tertiary"
         onPress={() => dispatch("prevMonth")}
       />
-      <View style={[flex_column_center, align_items_center]}>
-        <Text>{dateProcessor.getYear()}</Text>
-        <Text>{dateProcessor.getLongMonth()}</Text>
+      <View style={[flex_column_center, align_items_center, flex_1, mt_3]}>
+        <Text variant="secondary" style={m_5}>
+          {dateProcessor.getYear()}
+        </Text>
+        <Text size="l" style={m_5}>
+          {dateProcessor.getLongMonth()}
+        </Text>
       </View>
       <Button
         icon={<ChevronRight size={20} />}
