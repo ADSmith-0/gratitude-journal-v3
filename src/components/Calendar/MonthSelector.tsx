@@ -17,18 +17,10 @@ const MonthSelector = () => {
   const { date, dispatch } = useContext(DateContext);
   const dateProcessor = new DateProcessor(date);
 
-  const leftChevron = (pressed: boolean) => (
-    <ChevronLeft color={pressed ? "black" : "blue"} size={20} />
-  );
-
-  const rightChevron = (pressed: boolean) => (
-    <ChevronRight color={pressed ? "black" : "blue"} size={20} />
-  );
-
   return (
     <View style={[flex_row_center, justify_content_center]}>
       <Button
-        icon={leftChevron}
+        icon={<ChevronLeft size={20} />}
         variant="tertiary"
         onPress={() => dispatch("prevMonth")}
       />
@@ -37,7 +29,7 @@ const MonthSelector = () => {
         <Text>{dateProcessor.getLongMonth()}</Text>
       </View>
       <Button
-        icon={rightChevron}
+        icon={<ChevronRight size={20} />}
         variant="tertiary"
         onPress={() => dispatch("nextMonth")}
       />
