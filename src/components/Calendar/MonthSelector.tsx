@@ -13,7 +13,7 @@ import DateProcessor from "../../utils/DateProcessor";
 import Button from "../UI/Button";
 
 const MonthSelector = () => {
-  const { date } = useContext(DateContext);
+  const { date, dispatch } = useContext(DateContext);
   const dateProcessor = new DateProcessor(date);
 
   const leftChevron = (pressed: boolean) => (
@@ -26,12 +26,20 @@ const MonthSelector = () => {
 
   return (
     <View style={[flex_row_center, justify_content_center]}>
-      <Button icon={leftChevron} variant="tertiary" />
+      <Button
+        icon={leftChevron}
+        variant="tertiary"
+        onPress={() => dispatch("prevMonth")}
+      />
       <View style={[flex_column_center, align_items_center]}>
         <Text>{dateProcessor.getYear()}</Text>
         <Text>{dateProcessor.getLongMonth()}</Text>
       </View>
-      <Button icon={rightChevron} variant="tertiary" />
+      <Button
+        icon={rightChevron}
+        variant="tertiary"
+        onPress={() => dispatch("nextMonth")}
+      />
     </View>
   );
 };
