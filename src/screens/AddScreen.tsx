@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
-import { DateContext } from "../context/DateContext";
+import { DateContext } from "../context/DateContext/DateContext";
 import { colours, fontSize, styles } from "../styles";
 import EntriesStorage from "../utils/EntriesStorage";
 const { flex_column, ph_10, pl_3 } = styles;

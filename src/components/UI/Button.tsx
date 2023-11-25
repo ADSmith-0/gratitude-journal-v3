@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import {
   Pressable,
   PressableProps,
@@ -28,7 +29,8 @@ const {
 } = styles;
 
 type Props = {
-  title: string;
+  title?: string;
+  icon?: (pressed: boolean) => ReactElement;
   variant?: "primary" | "secondary" | "tertiary";
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
@@ -36,6 +38,7 @@ type Props = {
 
 const Button = ({
   title,
+  icon,
   variant = "primary",
   buttonStyle,
   textStyle,
@@ -90,14 +93,19 @@ const Button = ({
       ]}
       {...props}>
       {({ pressed }) => (
-        <Text
-          style={[
-            fs_m,
-            pressed ? variantTextStyle.pressed : variantTextStyle.normal,
-            textStyle,
-          ]}>
-          {title}
-        </Text>
+        <>
+          {icon?.(pressed)}
+          {title && (
+            <Text
+              style={[
+                fs_m,
+                pressed ? variantTextStyle.pressed : variantTextStyle.normal,
+                textStyle,
+              ]}>
+              {title}
+            </Text>
+          )}
+        </>
       )}
     </Pressable>
   );

@@ -1,5 +1,14 @@
-import { Text } from "react-native";
+import { View } from "react-native";
+import Calendar from "../components/Calendar/Calendar";
+import MonthSelector from "../components/Calendar/MonthSelector";
 
-const CalendarScreen = () => <Text>Calendar</Text>;
+const CalendarScreen = () => {
+  return (
+    <View>
+      <MonthSelector />
+      <Calendar />
+    </View>
+  );
+};
 
 export default CalendarScreen;
