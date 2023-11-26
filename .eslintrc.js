@@ -4,5 +4,6 @@ module.exports = {
   rules: {
     quotes: ["error", "double"],
     "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
   },
 };
