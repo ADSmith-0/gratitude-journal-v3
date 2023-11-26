@@ -1,7 +1,7 @@
 import { DateString } from "../types";
 
 class DateProcessor {
-  private date;
+  public date;
 
   constructor(date?: DateString) {
     if (date) {
