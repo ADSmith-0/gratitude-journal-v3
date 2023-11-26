@@ -11,6 +11,7 @@ const {
   flex_row_center,
   justify_content_center,
   m_5,
+  mb_3,
   mt_3,
 } = styles;
 import DateProcessor from "../../utils/DateProcessor";
@@ -28,7 +29,7 @@ const MonthSelector = () => {
         onPress={() => dispatch("prevMonth")}
       />
       <View style={[flex_column_center, align_items_center, flex_1, mt_3]}>
-        <Text variant="secondary" style={m_5}>
+        <Text variant="secondary" style={[m_5, mb_3]}>
           {dateProcessor.getYear()}
         </Text>
         <Text size="l" style={m_5}>
