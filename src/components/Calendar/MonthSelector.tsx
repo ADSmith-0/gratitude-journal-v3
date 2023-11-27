@@ -30,7 +30,7 @@ const MonthSelector = () => {
       />
       <View style={[flex_column_center, align_items_center, flex_1, mt_3]}>
         <Text variant="secondary" style={[m_5, mb_3]}>
-          {dateProcessor.getYear()}
+          {dateProcessor.date.getFullYear()}
         </Text>
         <Text size="l" style={m_5}>
           {dateProcessor.getLongMonth()}

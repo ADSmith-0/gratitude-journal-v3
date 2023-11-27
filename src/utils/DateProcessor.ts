@@ -42,10 +42,6 @@ class DateProcessor {
     return this.date.toLocaleDateString("en-GB", { month: "long" });
   }
 
-  getYear() {
-    return this.date.getFullYear();
-  }
-
   toReadableDate(): DateString {
     return new Intl.DateTimeFormat("en-GB").format(this.date) as DateString;
   }
