@@ -65,6 +65,6 @@ class EntriesStorage {
   }
 }
 
-const EntriesStorageInstace = new EntriesStorage();
+const EntriesStorageInstance = new EntriesStorage();
 
-export default EntriesStorageInstace;
+export default EntriesStorageInstance;
