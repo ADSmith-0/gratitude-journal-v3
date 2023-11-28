@@ -25,7 +25,7 @@ const App = () => (
             tabBarHideOnKeyboard: true,
             tabBarActiveBackgroundColor: colours.primary[800],
             tabBarStyle: {
-              height: dimensions[2],
+              height: dimensions[3],
             },
             tabBarIconStyle: {
               marginTop: spacing[3],
