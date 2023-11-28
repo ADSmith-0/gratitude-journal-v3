@@ -25,6 +25,8 @@ type Props = {
   variant?: "primary" | "secondary" | "tertiary";
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  backgroundColour?: ViewStyle["backgroundColor"];
+  backgroundColourPressed?: ViewStyle["backgroundColor"];
 } & PressableProps;
 
 const Button = ({
@@ -33,6 +35,8 @@ const Button = ({
   variant = "primary",
   buttonStyle,
   textStyle,
+  backgroundColour,
+  backgroundColourPressed,
   ...props
 }: Props) => {
   const variantStyle: Record<
@@ -44,31 +48,31 @@ const Button = ({
   > = {
     primary: {
       normal: {
-        backgroundColor: colours.primary[300],
+        backgroundColor: backgroundColour ?? colours.primary[300],
         color: colours.grey[900],
       },
       pressed: {
-        backgroundColor: colours.primary[200],
+        backgroundColor: backgroundColourPressed ?? colours.primary[200],
         color: colours.grey[900],
       },
     },
     secondary: {
       normal: {
-        backgroundColor: colours.primary[700],
+        backgroundColor: backgroundColour ?? colours.primary[700],
         color: colours.primary[100],
       },
       pressed: {
-        backgroundColor: colours.primary[800],
+        backgroundColor: backgroundColourPressed ?? colours.primary[800],
         color: colours.primary[100],
       },
     },
     tertiary: {
       normal: {
-        backgroundColor: "transparent",
+        backgroundColor: backgroundColour ?? "transparent",
         color: colours.primary[100],
       },
       pressed: {
-        backgroundColor: "transparent",
+        backgroundColor: backgroundColourPressed ?? "transparent",
         color: colours.primary[500],
       },
     },
