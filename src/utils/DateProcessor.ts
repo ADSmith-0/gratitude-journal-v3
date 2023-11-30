@@ -34,6 +34,12 @@ class DateProcessor {
     return this;
   }
 
+  setLastDateOfMonth() {
+    this.nextMonth();
+    this.date.setDate(0);
+    return this;
+  }
+
   getLongDay() {
     return this.date.toLocaleDateString("en-GB", { weekday: "long" });
   }
