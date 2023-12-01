@@ -1,19 +1,19 @@
 import { View } from "react-native";
 import useCalendarDates from "../../hooks/useCalendarDates";
-import { styles } from "../../styles";
-const { flex_row_center, gap_4, fs_m } = styles;
+import { colours, styles } from "../../styles";
+const { flex_row_center, fs_m } = styles;
 import Button from "../UI/Button";
 
 const Calendar = () => {
   const calendarDates = useCalendarDates();
-  console.log(calendarDates);
+  // console.log(calendarDates);
 
   return (
     <View
       style={[
         flex_row_center,
         styles.justify_content_center,
-        gap_4,
+        styles.gap_3,
         {
           flexWrap: "wrap",
         },
@@ -21,14 +21,22 @@ const Calendar = () => {
       {calendarDates.map((day, i) => (
         <Button
           key={`${day}${i}`}
-          variant="secondary"
-          buttonStyle={{
-            flexGrow: 0,
-            flexShrink: 1,
-            flexBasis: "11%",
-          }}
-          textStyle={[fs_m]}
-          disabled={!+day}
+          variant="tertiary"
+          buttonStyle={[
+            {
+              flexGrow: 0,
+              flexShrink: 1,
+              flexBasis: "11%",
+            },
+          ]}
+          textStyle={[
+            fs_m,
+            i < 14 && +day > 20 && styles.text_grey_400,
+            i < 7 && [styles.text_grey_300],
+          ]}
+          backgroundColour={colours.grey[900]}
+          backgroundColourPressed={colours.grey[800]}
+          disabled={i < 14 && +day > 20}
           title={day}
         />
       ))}

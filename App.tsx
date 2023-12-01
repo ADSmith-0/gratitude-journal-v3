@@ -18,12 +18,13 @@ const App = () => (
       <NavigationContainer>
         <Tab.Navigator
           sceneContainerStyle={{
-            backgroundColor: colours.grey[900],
+            backgroundColor: colours.offWhite,
           }}
           screenOptions={{
             tabBarActiveTintColor: colours.primary[100],
+            tabBarInactiveTintColor: colours.primary[500],
             tabBarHideOnKeyboard: true,
-            tabBarActiveBackgroundColor: colours.primary[800],
+            tabBarActiveBackgroundColor: colours.primary[900],
             tabBarStyle: {
               height: dimensions[3],
             },
@@ -32,7 +33,7 @@ const App = () => (
             },
             tabBarLabelStyle: {
               fontSize: fontSize.s,
-              paddingBottom: spacing[5],
+              paddingBottom: spacing[6],
             },
           }}>
           <Tab.Screen
