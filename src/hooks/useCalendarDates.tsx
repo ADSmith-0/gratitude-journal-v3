@@ -71,13 +71,15 @@ const useCalendarDates = () => {
     const monthLength = dateProcessor.date.getDate();
 
     let currentLastIndex = 7 + buffer + monthLength - 1;
+    let nextDay = 1;
 
     while (calendar.length !== 42 && calendar.length !== 49) {
       if (calendar[currentLastIndex]) {
-        calendar[currentLastIndex] = "0";
+        calendar[currentLastIndex] = nextDay.toString();
       } else {
-        calendar.push("0");
+        calendar.push(nextDay.toString());
       }
+      nextDay++;
       currentLastIndex++;
     }
 

@@ -18,33 +18,40 @@ const Calendar = () => {
           flexWrap: "wrap",
         },
       ]}>
-      {calendarDates.map((day, i) => (
-        <Button
-          key={`${day}${i}`}
-          variant="tertiary"
-          buttonStyle={[
-            {
-              flexGrow: 0,
-              flexShrink: 1,
-              flexBasis: "11%",
-            },
-            styles.pv_4,
-          ]}
-          textStyle={[
-            fs_m,
-            i < 14 && +day > 20 && styles.text_grey_400,
-            i < 7 && [styles.text_grey_400, styles.fs_s, styles.text_bold],
-          ]}
-          backgroundColour={
-            i < 14 && (!+day || +day > 20)
-              ? colours.offWhite
-              : colours.grey[900]
-          }
-          backgroundColourPressed={colours.grey[800]}
-          disabled={i < 14 && +day > 20}
-          title={day}
-        />
-      ))}
+      {calendarDates.map((day, i) => {
+        const numDay: number = +day;
+        const isDayStr = Number.isNaN(numDay);
+        const isDayPrevMonth = i < 14 && numDay > 20;
+        const isDayNextMonth = i > 35 && numDay < 10;
+
+        return (
+          <Button
+            key={`${day}${i}`}
+            variant="tertiary"
+            buttonStyle={[
+              {
+                flexGrow: 0,
+                flexShrink: 1,
+                flexBasis: "11%",
+              },
+              styles.pv_4,
+            ]}
+            textStyle={[
+              fs_m,
+              (isDayPrevMonth || isDayNextMonth) && styles.text_grey_400,
+              isDayStr && [styles.text_grey_300, styles.fs_s, styles.text_bold],
+            ]}
+            backgroundColour={
+              isDayStr || isDayPrevMonth || isDayNextMonth
+                ? colours.offWhite
+                : colours.grey[900]
+            }
+            backgroundColourPressed={colours.grey[800]}
+            disabled={isDayStr || isDayNextMonth || isDayPrevMonth}
+            title={day}
+          />
+        );
+      })}
     </View>
   );
 };
