@@ -48,10 +48,15 @@ const useCalendarDates = () => {
   useEffect(() => {
     let calendar: string[] = days.slice();
     dateProcessor.date.setDate(1);
+    const firstDay = dateProcessor.date.getDay();
+
+    dateProcessor.date.setDate(0);
+    const daysInPrevMonth = dateProcessor.date.getDate();
 
     let buffer = 1;
-    while (buffer < dateProcessor.date.getDay()) {
-      calendar.push("0");
+    while (buffer < firstDay) {
+      const dayDiff = firstDay - 1 - buffer;
+      calendar.push((daysInPrevMonth - dayDiff).toString());
       buffer++;
     }
 
