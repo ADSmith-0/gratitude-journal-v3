@@ -28,13 +28,18 @@ const Calendar = () => {
               flexShrink: 1,
               flexBasis: "11%",
             },
+            styles.pv_4,
           ]}
           textStyle={[
             fs_m,
             i < 14 && +day > 20 && styles.text_grey_400,
             i < 7 && [styles.text_grey_400, styles.fs_s, styles.text_bold],
           ]}
-          backgroundColour={colours.grey[900]}
+          backgroundColour={
+            i < 14 && (!+day || +day > 20)
+              ? colours.offWhite
+              : colours.grey[900]
+          }
           backgroundColourPressed={colours.grey[800]}
           disabled={i < 14 && +day > 20}
           title={day}
