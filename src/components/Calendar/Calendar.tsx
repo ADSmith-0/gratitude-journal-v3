@@ -32,7 +32,7 @@ const Calendar = () => {
           textStyle={[
             fs_m,
             i < 14 && +day > 20 && styles.text_grey_400,
-            i < 7 && [styles.text_grey_300],
+            i < 7 && [styles.text_grey_400, styles.fs_s, styles.text_bold],
           ]}
           backgroundColour={colours.grey[900]}
           backgroundColourPressed={colours.grey[800]}
