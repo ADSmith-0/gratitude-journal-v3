@@ -163,7 +163,7 @@ export const styles = StyleSheet.create({
   m_7: { margin: spacing[7] },
   m_8: { margin: spacing[8] },
   m_9: { margin: spacing[9] },
-  m_10: { marginVertical: spacing[10] },
+  m_10: { margin: spacing[10] },
   mb_1: { marginBottom: spacing[1] },
   mb_2: { marginBottom: spacing[2] },
   mb_3: { marginBottom: spacing[3] },
