@@ -25,11 +25,6 @@ const useCalendarDates = () => {
       buffer++;
     }
 
-    if (dateProcessor.date.getDay() === 0) {
-      calendar = calendar.concat(Array(6).fill("0"));
-      buffer = 6;
-    }
-
     calendar = calendar.concat(dates);
 
     dateProcessor.setLastDateOfMonth();
