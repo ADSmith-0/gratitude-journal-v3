@@ -1,3 +1,4 @@
+// import { useNavigation } from "@react-navigation/native";
 import { CalendarDays } from "lucide-react-native";
 import { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,13 +15,14 @@ const AddScreen = () => {
   const [defaultEntry, setDefaultEntry] = useState<string>();
   const [entry, setEntry] = useState<string>();
 
+  // const navigation = useNavigation();
+
   useEffect(() => {
     setDefaultEntry(EntriesStorage.get(date));
   }, [date]);
 
   const calendarOnTouch = () => {
-    // TODO calendar input onClick
-    console.log("hello");
+    // navigation.navigate("Calendar");
   };
 
   return (
