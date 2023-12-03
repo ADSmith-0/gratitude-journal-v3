@@ -58,11 +58,11 @@ const Button = ({
     },
     secondary: {
       normal: {
-        backgroundColor: backgroundColour ?? colours.primary[700],
+        backgroundColor: backgroundColour ?? colours.primary[800],
         color: colours.primary[100],
       },
       pressed: {
-        backgroundColor: backgroundColourPressed ?? colours.primary[800],
+        backgroundColor: backgroundColourPressed ?? colours.primary[700],
         color: colours.primary[100],
       },
     },
