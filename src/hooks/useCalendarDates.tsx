@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { DateContext } from "../context/DateContext/DateContext";
 import DateProcessor from "../utils/DateProcessor";
 
-// const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const days = ["M", "T", "W", "T", "F", "S", "S"];
 const dates = [
   "1",
