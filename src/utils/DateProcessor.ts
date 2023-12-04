@@ -34,10 +34,12 @@ class DateProcessor {
     return this;
   }
 
-  setLastDateOfMonth() {
+  getMonthLength() {
     this.nextMonth();
     this.date.setDate(0);
-    return this;
+    const monthLength = this.date.getDate();
+    this.date.setDate(1);
+    return monthLength;
   }
 
   getLongDay() {

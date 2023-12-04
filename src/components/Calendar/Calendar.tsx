@@ -1,59 +1,71 @@
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import useCalendarDates from "../../hooks/useCalendarDates";
-import { colours, styles } from "../../styles";
+import { styles } from "../../styles";
+import { days } from "../../utils/global";
+import Text from "../UI/Text";
 const { flex_row_center, fs_m } = styles;
 import Button from "../UI/Button";
+import { DateRelativeToToday } from "../../types";
 
 const Calendar = () => {
   const calendarDates = useCalendarDates();
-  // console.log(calendarDates);
+
+  // change calendar to [{ outOfBounds: boolean, date: number, beforeToday: boolean }]
+  // change screens to just add screen, autosave, calendar list as part of clicking on date
 
   return (
     <View
       style={[
         flex_row_center,
         styles.justify_content_center,
+        styles.flex_wrap,
+        styles.mt_5,
         styles.gap_3,
-        {
-          flexWrap: "wrap",
-        },
       ]}>
-      {calendarDates.map((day, i) => {
-        const numDay: number = +day;
-        const isDayStr = Number.isNaN(numDay);
-        const isDayPrevMonth = i < 14 && numDay > 20;
-        const isDayNextMonth = i > 35 && numDay < 10;
-
-        return (
-          <Button
-            key={`${day}${i}`}
-            variant="tertiary"
-            buttonStyle={[
-              {
-                flexGrow: 0,
-                flexShrink: 1,
-                flexBasis: "11%",
-              },
-              styles.pv_4,
-            ]}
-            textStyle={[
-              fs_m,
-              (isDayPrevMonth || isDayNextMonth) && styles.text_grey_400,
-              isDayStr && [styles.text_grey_300, styles.fs_s, styles.text_bold],
-            ]}
-            backgroundColour={
-              isDayStr || isDayPrevMonth || isDayNextMonth
-                ? colours.offWhite
-                : colours.grey[900]
-            }
-            backgroundColourPressed={colours.grey[800]}
-            disabled={isDayStr || isDayNextMonth || isDayPrevMonth}
-            title={day}
-          />
-        );
-      })}
+      {days.map((day, i) => (
+        <Text
+          key={day + i}
+          style={[
+            calendarStyles.row,
+            styles.text_align_center,
+            styles.text_bold,
+            styles.fs_s,
+            styles.text_grey_300,
+            styles.mb_4,
+          ]}>
+          {day}
+        </Text>
+      ))}
+      {calendarDates.map(({ date, relativeToToday, hasEntry }, i) => (
+        <Button
+          key={`${date}${i}`}
+          variant={"secondary"}
+          buttonStyle={[
+            calendarStyles.row,
+            styles.pv_3,
+            styles.bg_grey_900,
+            hasEntry && styles.bg_primary_800,
+            relativeToToday === DateRelativeToToday.OUT_OF_BOUNDS &&
+              styles.bg_offWhite,
+          ]}
+          textStyle={[
+            fs_m,
+            relativeToToday === DateRelativeToToday.OUT_OF_BOUNDS &&
+              styles.text_grey_400,
+          ]}
+          title={date}
+        />
+      ))}
     </View>
   );
 };
+
+const calendarStyles = StyleSheet.create({
+  row: {
+    flexGrow: 0,
+    flexShrink: 1,
+    flexBasis: "11%",
+  },
+});
 
 export default Calendar;

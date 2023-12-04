@@ -1,46 +1,52 @@
 import { useContext, useEffect, useState } from "react";
 import { DateContext } from "../context/DateContext/DateContext";
+import { calendarDate, DateRelativeToToday } from "../types";
 import DateProcessor from "../utils/DateProcessor";
-import { dates, days } from "../utils/global";
 
 const useCalendarDates = () => {
   const { date } = useContext(DateContext);
   const dateProcessor = new DateProcessor(date);
 
-  const [calendarDates, setCalendarDates] = useState<string[]>([]);
+  const [calendarDates, setCalendarDates] = useState<calendarDate[]>([]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: the rule is garbage
   useEffect(() => {
-    let calendar: string[] = days.slice();
+    const calendar: calendarDate[] = [];
+
     dateProcessor.date.setDate(1);
     const firstDay = dateProcessor.date.getDay();
 
-    dateProcessor.date.setDate(0);
-    const daysInPrevMonth = dateProcessor.date.getDate();
-
-    let buffer = 1;
-    while (buffer < firstDay) {
-      const dayDiff = firstDay - 1 - buffer;
-      calendar.push((daysInPrevMonth - dayDiff).toString());
-      buffer++;
+    let startBuffer = 1;
+    while (startBuffer < firstDay) {
+      calendar.push({
+        date: " ",
+        relativeToToday: DateRelativeToToday.OUT_OF_BOUNDS,
+        hasEntry: false,
+      });
+      startBuffer++;
     }
 
-    calendar = calendar.concat(dates);
+    const monthLength = dateProcessor.getMonthLength();
+    const today = new Date().valueOf();
 
-    dateProcessor.setLastDateOfMonth();
-    const monthLength = dateProcessor.date.getDate();
+    while (dateProcessor.date.getDate() < monthLength) {
+      calendar.push({
+        date: dateProcessor.date.getDate().toString(),
+        relativeToToday:
+          dateProcessor.date.valueOf() < today
+            ? DateRelativeToToday.BEFORE_TODAY
+            : DateRelativeToToday.OUT_OF_BOUNDS,
+        hasEntry: false,
+      });
+      dateProcessor.nextDay();
+    }
 
-    let currentLastIndex = 7 + buffer + monthLength - 1;
-    let nextDay = 1;
-
-    while (calendar.length !== 42 && calendar.length !== 49) {
-      if (calendar[currentLastIndex]) {
-        calendar[currentLastIndex] = nextDay.toString();
-      } else {
-        calendar.push(nextDay.toString());
-      }
-      nextDay++;
-      currentLastIndex++;
+    while (calendar.length !== 35 && calendar.length !== 42) {
+      calendar.push({
+        date: " ",
+        relativeToToday: DateRelativeToToday.OUT_OF_BOUNDS,
+        hasEntry: false,
+      });
     }
 
     setCalendarDates(calendar);
