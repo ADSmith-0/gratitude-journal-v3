@@ -35,10 +35,11 @@ class DateProcessor {
   }
 
   getMonthLength() {
+    const currentDate = this.date.getDate();
     this.nextMonth();
     this.date.setDate(0);
     const monthLength = this.date.getDate();
-    this.date.setDate(1);
+    this.date.setDate(currentDate);
     return monthLength;
   }
 
