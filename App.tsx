@@ -37,6 +37,15 @@ const App = () => (
             },
           }}>
           <Tab.Screen
+            name="Add"
+            component={AddScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Plus color={color} size={size / 1.3} />
+              ),
+            }}
+          />
+          <Tab.Screen
             name="Calendar"
             component={CalendarScreen}
             options={{
