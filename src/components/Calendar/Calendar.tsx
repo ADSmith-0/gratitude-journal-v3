@@ -5,8 +5,6 @@ import { days } from "../../utils/global";
 import Text from "../UI/Text";
 const {
   bg_primary_800,
-  bg_grey_900,
-  bg_offWhite,
   flex_row_center,
   flex_wrap,
   fs_m,
@@ -14,12 +12,12 @@ const {
   gap_3,
   justify_content_center,
   mb_4,
-  mt_5,
+  mt_8,
   pv_3,
   text_bold,
   text_align_center,
   text_grey_300,
-  text_grey_400,
+  text_grey_800,
 } = styles;
 import Button from "../UI/Button";
 import { RelativeDate } from "../../types";
@@ -34,23 +32,15 @@ const { row } = StyleSheet.create({
 
 const Calendar = () => {
   const calendarDates = useCalendarDates();
-
   // TODO change screens to just add screen, autosave, calendar list as part of clicking on date
 
   return (
     <View
-      style={[flex_row_center, justify_content_center, flex_wrap, mt_5, gap_3]}>
+      style={[flex_row_center, justify_content_center, flex_wrap, mt_8, gap_3]}>
       {days.map((day, i) => (
         <Text
           key={day + i}
-          style={[
-            row,
-            text_align_center,
-            text_bold,
-            fs_s,
-            text_grey_300,
-            mb_4,
-          ]}>
+          style={[row, text_align_center, fs_s, text_grey_300, mb_4]}>
           {day}
         </Text>
       ))}
@@ -60,17 +50,12 @@ const Calendar = () => {
         ) : (
           <Button
             key={`${date}${i}`}
-            variant={"secondary"}
-            buttonStyle={[
-              row,
-              pv_3,
-              bg_grey_900,
-              hasEntry && bg_primary_800,
-              relativeToToday === RelativeDate.FUTURE && bg_offWhite,
-            ]}
+            variant="tertiary"
+            buttonStyle={[row, pv_3, hasEntry && bg_primary_800]}
             textStyle={[
               fs_m,
-              relativeToToday === RelativeDate.FUTURE && text_grey_400,
+              text_bold,
+              relativeToToday === RelativeDate.FUTURE && text_grey_800,
             ]}
             title={date}
           />
