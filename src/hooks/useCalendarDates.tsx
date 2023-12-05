@@ -58,7 +58,6 @@ const useCalendarDates = () => {
 
     if (currentMonth !== month.current) {
       if (cache.current.has(currentMonth)) {
-        console.log("cache hit");
         setCalendarDates(cache.current.get(currentMonth));
       } else {
         month.current = currentMonth;
