@@ -10,7 +10,6 @@ import { DateRelativeToToday } from "../../types";
 const Calendar = () => {
   const calendarDates = useCalendarDates();
 
-  // change calendar to [{ outOfBounds: boolean, date: number, beforeToday: boolean }]
   // change screens to just add screen, autosave, calendar list as part of clicking on date
 
   return (
