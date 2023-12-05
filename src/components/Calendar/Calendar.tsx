@@ -35,7 +35,7 @@ const { row } = StyleSheet.create({
 const Calendar = () => {
   const calendarDates = useCalendarDates();
 
-  // change screens to just add screen, autosave, calendar list as part of clicking on date
+  // TODO change screens to just add screen, autosave, calendar list as part of clicking on date
 
   return (
     <View
