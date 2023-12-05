@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { DateContext } from "../context/DateContext/DateContext";
-import { calendarDate, DateRelativeToToday } from "../types";
+import { calendarDate, RelativeDate } from "../types";
 import DateProcessor from "../utils/DateProcessor";
 import EntriesStorageInstance from "../utils/EntriesStorage";
 
@@ -14,7 +14,7 @@ const calculateMonth = (dateProcessor: DateProcessor): calendarDate[] => {
   while (startBuffer < firstDay) {
     calendar.push({
       date: " ",
-      relativeToToday: DateRelativeToToday.OUT_OF_BOUNDS,
+      relativeToToday: RelativeDate.FUTURE,
       hasEntry: false,
     });
     startBuffer++;
@@ -28,8 +28,8 @@ const calculateMonth = (dateProcessor: DateProcessor): calendarDate[] => {
       date: dateProcessor.date.getDate().toString(),
       relativeToToday:
         dateProcessor.date.valueOf() < today
-          ? DateRelativeToToday.BEFORE_TODAY
-          : DateRelativeToToday.OUT_OF_BOUNDS,
+          ? RelativeDate.PAST
+          : RelativeDate.FUTURE,
       hasEntry: !!EntriesStorageInstance.get(dateProcessor.toReadableDate()),
     });
     dateProcessor.nextDay();
@@ -38,7 +38,7 @@ const calculateMonth = (dateProcessor: DateProcessor): calendarDate[] => {
   while (calendar.length !== 35 && calendar.length !== 42) {
     calendar.push({
       date: " ",
-      relativeToToday: DateRelativeToToday.OUT_OF_BOUNDS,
+      relativeToToday: RelativeDate.FUTURE,
       hasEntry: false,
     });
   }

@@ -22,7 +22,7 @@ const {
   text_grey_400,
 } = styles;
 import Button from "../UI/Button";
-import { DateRelativeToToday } from "../../types";
+import { RelativeDate } from "../../types";
 
 const { row } = StyleSheet.create({
   row: {
@@ -66,13 +66,11 @@ const Calendar = () => {
               pv_3,
               bg_grey_900,
               hasEntry && bg_primary_800,
-              relativeToToday === DateRelativeToToday.OUT_OF_BOUNDS &&
-                bg_offWhite,
+              relativeToToday === RelativeDate.FUTURE && bg_offWhite,
             ]}
             textStyle={[
               fs_m,
-              relativeToToday === DateRelativeToToday.OUT_OF_BOUNDS &&
-                text_grey_400,
+              relativeToToday === RelativeDate.FUTURE && text_grey_400,
             ]}
             title={date}
           />
