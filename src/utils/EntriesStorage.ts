@@ -1,4 +1,5 @@
-import { Entries } from "../types";
+import { DateString, Entries, MonthYear } from "../types";
+import DateProcessor from "./DateProcessor";
 import MMKV from "./MMKV";
 
 class EntriesStorage {
@@ -17,24 +18,48 @@ class EntriesStorage {
     });
   }
 
-  set(key: string, value: string) {
+  set(date: number, value: string) {
     MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
       if (error) {
         console.error(error);
         return;
       }
 
-      entries[key] = value;
+      const dateProcessor = new DateProcessor(date);
+      const monthYear = dateProcessor.getMonthYear();
+      const currentDate = dateProcessor.date.getDate();
+
+      if (!entries[monthYear]) {
+        entries[monthYear] = {};
+      }
+
+      entries[monthYear][currentDate] = value;
 
       MMKV.setMap(this.entriesKey, entries);
     });
   }
 
-  get(key: string): string | undefined {
+  get(date: number): string | undefined {
     const entries: Entries = MMKV.getMap<Entries>(this.entriesKey);
 
-    if (entries?.[key]) {
-      return entries[key];
+    const dateProcessor = new DateProcessor(date);
+    const monthYear = dateProcessor.getMonthYear();
+    const currentDate = dateProcessor.date.getDate();
+
+    if (entries?.[monthYear]) {
+      return entries[monthYear][currentDate];
+    }
+
+    return undefined;
+  }
+
+  getMonth(date: number): Record<string, string> | undefined {
+    const entries: Entries = MMKV.getMap<Entries>(this.entriesKey);
+    const dateProcessor = new DateProcessor(date);
+    const monthYear = dateProcessor.getMonthYear();
+
+    if (entries?.[monthYear]) {
+      return entries[monthYear];
     }
 
     return undefined;
@@ -51,14 +76,17 @@ class EntriesStorage {
     });
   }
 
-  remove(key: string) {
+  remove(date: number) {
     MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
       if (error) {
         console.error(error);
         return;
       }
 
-      delete entries[key];
+      const dateProcessor = new DateProcessor(date);
+      delete entries[dateProcessor.getMonthYear()][
+        dateProcessor.date.getDate()
+      ];
 
       MMKV.setMap(this.entriesKey, entries);
     });

@@ -22,15 +22,20 @@ const calculateMonth = (dateProcessor: DateProcessor): calendarDate[] => {
 
   const today = new Date().valueOf();
   const currentMonth = dateProcessor.date.getMonth();
+  const monthEntries = EntriesStorageInstance.getMonth(
+    dateProcessor.getValue(),
+  );
 
   while (dateProcessor.date.getMonth() === currentMonth) {
+    const currentDate = dateProcessor.date.getDate().toString();
+
     calendar.push({
-      date: dateProcessor.date.getDate().toString(),
+      date: currentDate,
       relativeToToday:
         dateProcessor.date.valueOf() < today
           ? RelativeDate.PAST
           : RelativeDate.FUTURE,
-      hasEntry: !!EntriesStorageInstance.get(dateProcessor.toReadableDate()),
+      hasEntry: !!monthEntries?.[currentDate] ?? false,
     });
     dateProcessor.nextDay();
   }

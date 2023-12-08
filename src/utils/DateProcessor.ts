@@ -44,6 +44,10 @@ class DateProcessor {
     return monthLength;
   }
 
+  getMonthYear(): MonthYear {
+    return `${this.date.getMonth() + 1}/${this.date.getFullYear()}`;
+  }
+
   getLongDay() {
     return this.date.toLocaleDateString("en-GB", { weekday: "long" });
   }
