@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { DateContext } from "../context/DateContext/DateContext";
-import { calendarDate, RelativeDate } from "../types";
+import { RelativeDate, calendarDate } from "../types";
 import DateProcessor from "../utils/DateProcessor";
 import EntriesStorageInstance from "../utils/EntriesStorage";
 

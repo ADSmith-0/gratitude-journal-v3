@@ -1,6 +1,5 @@
 import { ReactNode, useReducer } from "react";
 import { DateContext } from "./DateContext";
-import { DateString } from "../../types";
 import DateProcessor from "../../utils/DateProcessor";
 
 type Props = {
@@ -10,8 +9,8 @@ type Props = {
 export type Action = "nextDay" | "prevDay" | "nextMonth" | "prevMonth";
 
 const DateContextProvider = ({ children }: Props) => {
-  const reducer = (state: DateString, action: Action): DateString => {
-    const date = new DateProcessor(state);
+  const reducer = (currentDate: number, action: Action): number => {
+    const date = new DateProcessor(currentDate);
 
     switch (action) {
       case "nextDay":
@@ -28,13 +27,10 @@ const DateContextProvider = ({ children }: Props) => {
         break;
     }
 
-    return date.toReadableDate();
+    return date.getValue();
   };
 
-  const [date, dispatch] = useReducer(
-    reducer,
-    new DateProcessor().toReadableDate(),
-  );
+  const [date, dispatch] = useReducer(reducer, new DateProcessor().getValue());
 
   return (
     <DateContext.Provider value={{ date, dispatch }}>

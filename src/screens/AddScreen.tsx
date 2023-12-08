@@ -6,11 +6,13 @@ import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
 import { DateContext } from "../context/DateContext/DateContext";
 import { colours, fontSize, styles } from "../styles";
+import DateProcessor from "../utils/DateProcessor";
 import EntriesStorage from "../utils/EntriesStorage";
 const { flex_column, mt_10, ph_10, pl_3 } = styles;
 
 const AddScreen = () => {
   const { date } = useContext(DateContext);
+  const dateProcessor = new DateProcessor(date);
 
   const [defaultEntry, setDefaultEntry] = useState<string>();
   const [entry, setEntry] = useState<string>();
@@ -31,7 +33,7 @@ const AddScreen = () => {
         label="Selected Date"
         icon={<CalendarDays color={colours.grey[100]} size={fontSize.l} />}
         editable={false}
-        value={date}
+        value={dateProcessor.toReadableDate()}
         onTouchStart={calendarOnTouch}
       />
       <Input

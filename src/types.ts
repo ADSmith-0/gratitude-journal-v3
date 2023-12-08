@@ -1,6 +1,9 @@
-export type Entries = { [date: string]: string };
+export type MonthYear = `${string}/${string}`;
+export type DateString = `${string}/${string}/${string}`;
 
-export type DateString = `${number}/${number}/${number}`;
+export type Entries = {
+  [monthYear: MonthYear]: { [date: number]: string };
+};
 
 export enum RelativeDate {
   PAST = 1,
