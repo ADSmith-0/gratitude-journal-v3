@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import useCalendarDates from "../../hooks/useCalendarDates";
 import { styles } from "../../styles";
-import { days } from "../../utils/global";
+import { days } from "../../utils/globals";
 import Text from "../UI/Text";
 const {
   bg_primary_800,
