@@ -49,7 +49,7 @@ const Calendar = () => {
           <Text key={`${date}${i}`} style={row} />
         ) : (
           <Button
-            key={`${date}${i}`}
+            key={date}
             variant="tertiary"
             buttonStyle={[row, pv_3, hasEntry && bg_primary_800]}
             textStyle={[
