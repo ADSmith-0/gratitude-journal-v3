@@ -58,16 +58,17 @@ const useCalendarDates = () => {
   useEffect(() => {
     const dateProcessor = new DateProcessor(date);
     const currentMonth = dateProcessor.date.getMonth();
+    const monthYear = dateProcessor.getMonthYear();
 
     if (currentMonth !== month.current) {
-      if (cache.current.has(currentMonth)) {
-        setCalendarDates(cache.current.get(currentMonth));
+      if (cache.current.has(monthYear)) {
+        setCalendarDates(cache.current.get(monthYear));
       } else {
         month.current = currentMonth;
         const calendarMonth: calendarDate[] = calculateMonth(dateProcessor);
         setCalendarDates(calendarMonth);
         if (cache.current.size < 10) {
-          cache.current.set(currentMonth, calendarMonth);
+          cache.current.set(monthYear, calendarMonth);
         }
       }
     }
