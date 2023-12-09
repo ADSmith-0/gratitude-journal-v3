@@ -35,15 +35,6 @@ class DateProcessor {
     return this.date.valueOf();
   }
 
-  getMonthLength() {
-    const currentDate = this.date.getDate();
-    this.nextMonth();
-    this.date.setDate(0);
-    const monthLength = this.date.getDate();
-    this.date.setDate(currentDate);
-    return monthLength;
-  }
-
   getMonthYear(): MonthYear {
     return `${this.date.getMonth() + 1}/${this.date.getFullYear()}`;
   }
