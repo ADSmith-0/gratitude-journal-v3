@@ -8,7 +8,9 @@ const calculateMonth = (dateProcessor: DateProcessor): calendarDate[] => {
   const calendar: calendarDate[] = [];
 
   dateProcessor.date.setDate(1);
-  const firstDay = dateProcessor.date.getDay();
+
+  // If the first day is Sunday (0) then set firstDay to 7 to generate the correct buffer count of 6
+  const firstDay = dateProcessor.date.getDay() || 7;
 
   let startBuffer = 1;
   while (startBuffer < firstDay) {
