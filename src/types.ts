@@ -7,8 +7,7 @@ export type Entries = {
 
 export enum DateTag {
   VALID = 1,
-  TODAY = 2,
-  INVALID = 3,
+  INVALID = 2,
 }
 
 export type calendarDate = {
