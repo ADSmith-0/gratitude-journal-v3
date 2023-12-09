@@ -37,9 +37,9 @@ const Calendar = () => {
   return (
     <View
       style={[flex_row_center, justify_content_center, flex_wrap, mt_8, gap_3]}>
-      {days.map((day, i) => (
+      {days.map(day => (
         <Text
-          key={day + i}
+          key={day}
           style={[row, text_align_center, fs_s, text_grey_300, mb_4]}>
           {day}
         </Text>
