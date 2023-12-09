@@ -20,7 +20,7 @@ const {
   text_grey_800,
 } = styles;
 import Button from "../UI/Button";
-import { RelativeDate } from "../../types";
+import { DateTag } from "../../types";
 
 const { row } = StyleSheet.create({
   row: {
@@ -44,7 +44,7 @@ const Calendar = () => {
           {day}
         </Text>
       ))}
-      {calendarDates.map(({ date, relativeToToday, hasEntry }, i) =>
+      {calendarDates.map(({ date, dateTag, hasEntry }, i) =>
         date === " " ? (
           <Text key={`${date}${i}`} style={row} />
         ) : (
@@ -55,7 +55,7 @@ const Calendar = () => {
             textStyle={[
               fs_m,
               text_bold,
-              relativeToToday === RelativeDate.FUTURE && text_grey_800,
+              dateTag === DateTag.INVALID && text_grey_800,
             ]}
             title={date}
           />

@@ -5,14 +5,14 @@ export type Entries = {
   [monthYear: MonthYear]: { [date: number]: string };
 };
 
-export enum RelativeDate {
-  PAST = 1,
+export enum DateTag {
+  VALID = 1,
   TODAY = 2,
-  FUTURE = 3,
+  INVALID = 3,
 }
 
 export type calendarDate = {
   date: string;
-  relativeToToday?: RelativeDate;
+  dateTag: DateTag;
   hasEntry: boolean;
 };
