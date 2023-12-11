@@ -1,6 +1,6 @@
 import { ReactNode, useReducer } from "react";
-import { DateContext } from "./DateContext";
-import DateProcessor from "../../utils/DateProcessor";
+import { DateContext } from "src/context/DateContext/DateContext";
+import DateProcessor from "src/utils/DateProcessor";
 
 type Props = {
   children: ReactNode;

@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { DateContext } from "../context/DateContext/DateContext";
-import { DateTag, calendarDate } from "../types";
-import DateProcessor from "../utils/DateProcessor";
-import EntriesStorageInstance from "../utils/EntriesStorage";
+import { DateContext } from "src/context/DateContext/DateContext";
+import { DateTag, calendarDate } from "src/types";
+import DateProcessor from "src/utils/DateProcessor";
+import EntriesStorageInstance from "src/utils/EntriesStorage";
 
 const calculateMonth = (dateProcessor: DateProcessor): calendarDate[] => {
   const calendar: calendarDate[] = [];

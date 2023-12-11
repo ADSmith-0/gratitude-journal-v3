@@ -1,6 +1,6 @@
-import { DateString, Entries, MonthYear } from "../types";
-import DateProcessor from "./DateProcessor";
-import MMKV from "./MMKV";
+import { Entries } from "src/types";
+import DateProcessor from "src/utils/DateProcessor";
+import MMKV from "src/utils/MMKV";
 
 class EntriesStorage {
   private entriesKey = "entries";

@@ -1,4 +1,4 @@
-import { DateString, MonthYear } from "../types";
+import { DateString, MonthYear } from "src/types";
 
 class DateProcessor {
   public date;

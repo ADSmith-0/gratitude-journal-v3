@@ -1,6 +1,6 @@
 import { Dispatch, createContext } from "react";
-import DateProcessor from "../../utils/DateProcessor";
-import { Action } from "./DateContextProvider";
+import DateProcessor from "src/utils/DateProcessor";
+import { Action } from "src/context/DateContext/DateContextProvider";
 
 type IDateContext = {
   date: number;
