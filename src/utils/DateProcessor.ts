@@ -1,14 +1,11 @@
-import { DateString } from "../types";
+import { DateString, MonthYear } from "../types";
 
 class DateProcessor {
   public date;
 
-  constructor(date?: DateString) {
+  constructor(date?: number) {
     if (date) {
-      const [day, month, year]: number[] = date.split(
-        "/",
-      ) as unknown as number[];
-      this.date = new Date(year, month - 1, day);
+      this.date = new Date(date);
     } else {
       this.date = new Date();
     }
@@ -32,6 +29,14 @@ class DateProcessor {
   prevMonth() {
     this.date.setMonth(this.date.getMonth() - 1);
     return this;
+  }
+
+  getValue() {
+    return this.date.valueOf();
+  }
+
+  getMonthYear(): MonthYear {
+    return `${this.date.getMonth() + 1}/${this.date.getFullYear()}`;
   }
 
   getLongDay() {

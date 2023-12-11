@@ -1,46 +1,81 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { DateContext } from "../context/DateContext/DateContext";
+import { DateTag, calendarDate } from "../types";
 import DateProcessor from "../utils/DateProcessor";
-import { matrix } from "../utils/utils";
+import EntriesStorageInstance from "../utils/EntriesStorage";
+
+const calculateMonth = (dateProcessor: DateProcessor): calendarDate[] => {
+  const calendar: calendarDate[] = [];
+
+  dateProcessor.date.setDate(1);
+
+  // If the first day is Sunday (0) then set firstDay to 7 to generate the correct buffer count of 6
+  const firstDay = dateProcessor.date.getDay() || 7;
+
+  let startBuffer = 1;
+  while (startBuffer < firstDay) {
+    calendar.push({
+      date: " ",
+      dateTag: DateTag.INVALID,
+      hasEntry: false,
+    });
+    startBuffer++;
+  }
+
+  const today = new Date().valueOf();
+  const currentMonth = dateProcessor.date.getMonth();
+  const monthEntries = EntriesStorageInstance.getMonth(
+    dateProcessor.getValue(),
+  );
+
+  while (dateProcessor.date.getMonth() === currentMonth) {
+    const currentDate = dateProcessor.date.getDate().toString();
+
+    calendar.push({
+      date: currentDate,
+      dateTag:
+        dateProcessor.date.valueOf() < today ? DateTag.VALID : DateTag.INVALID,
+      hasEntry: !!monthEntries?.[currentDate] ?? false,
+    });
+    dateProcessor.nextDay();
+  }
+
+  while (calendar.length !== 35 && calendar.length !== 42) {
+    calendar.push({
+      date: " ",
+      dateTag: DateTag.INVALID,
+      hasEntry: false,
+    });
+  }
+
+  return calendar;
+};
 
 const useCalendarDates = () => {
   const { date } = useContext(DateContext);
-  const dateProcessor = new DateProcessor(date);
+  const [calendarDates, setCalendarDates] = useState<calendarDate[]>([]);
+  const month = useRef<number>();
+  const cache = useRef(new Map());
 
-  const [calendarDates, setCalendarDates] = useState<string[][]>([[], []]);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: the rule is garbage
   useEffect(() => {
-    const calendar: string[][] = matrix(7, 7, "0");
-    calendar[0] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const dateProcessor = new DateProcessor(date);
+    const currentMonth = dateProcessor.date.getMonth();
+    const monthYear = dateProcessor.getMonthYear();
 
-    let i = 1;
-    let j = 0;
-
-    dateProcessor.nextMonth();
-    dateProcessor.date.setDate(0);
-    const daysInMonth = dateProcessor.date.getDate();
-
-    dateProcessor.date.setDate(1);
-
-    while (j < dateProcessor.date.getDay()) {
-      j++;
-    }
-
-    const bufferDays = j;
-
-    while (i * 7 + j - bufferDays - 7 < daysInMonth) {
-      calendar[i][j] = dateProcessor.date.getDate().toString();
-      dateProcessor.nextDay();
-      j++;
-      if (j % 7 === 0) {
-        i++;
-        j = 0;
+    if (currentMonth !== month.current) {
+      if (cache.current.has(monthYear)) {
+        setCalendarDates(cache.current.get(monthYear));
+      } else {
+        const calendarMonth: calendarDate[] = calculateMonth(dateProcessor);
+        setCalendarDates(calendarMonth);
+        if (cache.current.size < 10) {
+          cache.current.set(monthYear, calendarMonth);
+        }
       }
+      month.current = currentMonth;
     }
-
-    setCalendarDates(calendar);
-  }, [dateProcessor.date.getMonth()]);
+    // NOTE: Might need a onUnmount call to delete cache in the future
+  }, [date]);
 
   return calendarDates;
 };

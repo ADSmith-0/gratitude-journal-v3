@@ -1,3 +1,4 @@
+// import { useNavigation } from "@react-navigation/native";
 import { CalendarDays } from "lucide-react-native";
 import { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -5,22 +6,25 @@ import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
 import { DateContext } from "../context/DateContext/DateContext";
 import { colours, fontSize, styles } from "../styles";
+import DateProcessor from "../utils/DateProcessor";
 import EntriesStorage from "../utils/EntriesStorage";
 const { flex_column, mt_10, ph_10, pl_3 } = styles;
 
 const AddScreen = () => {
   const { date } = useContext(DateContext);
+  const dateProcessor = new DateProcessor(date);
 
   const [defaultEntry, setDefaultEntry] = useState<string>();
   const [entry, setEntry] = useState<string>();
+
+  // const navigation = useNavigation();
 
   useEffect(() => {
     setDefaultEntry(EntriesStorage.get(date));
   }, [date]);
 
   const calendarOnTouch = () => {
-    // TODO calendar input onClick
-    console.log("hello");
+    // navigation.navigate("Calendar");
   };
 
   return (
@@ -29,7 +33,7 @@ const AddScreen = () => {
         label="Selected Date"
         icon={<CalendarDays color={colours.grey[100]} size={fontSize.l} />}
         editable={false}
-        value={date}
+        value={dateProcessor.toReadableDate()}
         onTouchStart={calendarOnTouch}
       />
       <Input
@@ -47,7 +51,7 @@ const AddScreen = () => {
       />
       <Button
         title="Submit"
-        disabled={defaultEntry === entry || entry === ""} // TODO change to error instead of disable
+        disabled={defaultEntry === entry || entry === ""} // TODO: Change to error instead of disable
         onPress={() => EntriesStorage.set(date, entry as string)}
         buttonStyle={mt_10}
       />

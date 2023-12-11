@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { View } from "react-native";
 import Text from "../UI/Text";
 import { DateContext } from "../../context/DateContext/DateContext";
-import { styles } from "../../styles";
+import { fontSize, styles } from "../../styles";
 const {
   align_items_center,
   flex_1,
@@ -18,8 +18,10 @@ import DateProcessor from "../../utils/DateProcessor";
 import Button from "../UI/Button";
 
 const MonthSelector = () => {
+  // TODO: Change Button allow for hiding next button
   const { date, dispatch } = useContext(DateContext);
   const dateProcessor = new DateProcessor(date);
+  const today = new DateProcessor();
 
   return (
     <View style={[flex_row_center, justify_content_center]}>
@@ -37,9 +39,10 @@ const MonthSelector = () => {
         </Text>
       </View>
       <Button
-        icon={<ChevronRight size={20} />}
+        icon={<ChevronRight size={fontSize.l} />}
         variant="tertiary"
         onPress={() => dispatch("nextMonth")}
+        disabled={dateProcessor.getMonthYear() === today.getMonthYear()}
       />
     </View>
   );
