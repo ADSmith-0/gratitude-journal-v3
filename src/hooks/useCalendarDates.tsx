@@ -66,13 +66,13 @@ const useCalendarDates = () => {
       if (cache.current.has(monthYear)) {
         setCalendarDates(cache.current.get(monthYear));
       } else {
-        month.current = currentMonth;
         const calendarMonth: calendarDate[] = calculateMonth(dateProcessor);
         setCalendarDates(calendarMonth);
         if (cache.current.size < 10) {
           cache.current.set(monthYear, calendarMonth);
         }
       }
+      month.current = currentMonth;
     }
     // NOTE: Might need a onUnmount call to delete cache in the future
   }, [date]);
