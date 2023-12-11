@@ -74,6 +74,7 @@ const useCalendarDates = () => {
         }
       }
     }
+    // NOTE: Might need a onUnmount call to delete cache in the future
   }, [date]);
 
   return calendarDates;
