@@ -51,7 +51,7 @@ const AddScreen = () => {
       />
       <Button
         title="Submit"
-        disabled={defaultEntry === entry || entry === ""} // TODO change to error instead of disable
+        disabled={defaultEntry === entry || entry === ""} // TODO: Change to error instead of disable
         onPress={() => EntriesStorage.set(date, entry as string)}
         buttonStyle={mt_10}
       />

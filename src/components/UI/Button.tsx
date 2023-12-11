@@ -29,7 +29,7 @@ type Props = {
   backgroundColourPressed?: ViewStyle["backgroundColor"];
 } & PressableProps;
 
-// TODO Clean up this component
+// TODO: Clean up this component
 
 const Button = ({
   title,
