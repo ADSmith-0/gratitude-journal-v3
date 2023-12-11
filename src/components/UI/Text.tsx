@@ -1,5 +1,5 @@
 import { Text as RNText, TextProps, TextStyle } from "react-native";
-import { colours, fontSize, styles } from "../../styles";
+import { colours, fontSize, styles } from "src/styles";
 const { text_grey_100, fs_m } = styles;
 
 type Props = {

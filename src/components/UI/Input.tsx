@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { TextInput, TextInputProps, View } from "react-native";
-import { styles } from "../../styles";
-import Text from "./Text";
+import { styles } from "src/styles";
+import Text from "src/components/UI/Text";
 const {
   bg_white,
   border_1,

@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import Calendar from "../components/Calendar/Calendar";
-import MonthSelector from "../components/Calendar/MonthSelector";
+import Calendar from "src/components/Calendar/Calendar";
+import MonthSelector from "src/components/Calendar/MonthSelector";
 
 const CalendarScreen = () => {
   return (

@@ -7,7 +7,7 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import { colours, styles } from "../../styles";
+import { colours, styles } from "src/styles";
 const {
   align_self_end,
   br_1,

@@ -1,9 +1,9 @@
 import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { useContext } from "react";
 import { View } from "react-native";
-import Text from "../UI/Text";
-import { DateContext } from "../../context/DateContext/DateContext";
-import { fontSize, styles } from "../../styles";
+import Text from "src/components/UI/Text";
+import { DateContext } from "src/context/DateContext/DateContext";
+import { fontSize, styles } from "src/styles";
 const {
   align_items_center,
   flex_1,
@@ -14,8 +14,8 @@ const {
   mb_3,
   mt_3,
 } = styles;
-import DateProcessor from "../../utils/DateProcessor";
-import Button from "../UI/Button";
+import DateProcessor from "src/utils/DateProcessor";
+import Button from "src/components/UI/Button";
 
 const MonthSelector = () => {
   // TODO: Change Button allow for hiding next button
