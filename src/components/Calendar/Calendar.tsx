@@ -11,9 +11,10 @@ const {
   fs_s,
   gap_3,
   justify_content_center,
-  mb_4,
+  mb_7,
   mt_8,
   pv_3,
+  row_gap_5,
   text_bold,
   text_align_center,
   text_grey_300,
@@ -36,11 +37,18 @@ const Calendar = () => {
 
   return (
     <View
-      style={[flex_row_center, justify_content_center, flex_wrap, mt_8, gap_3]}>
+      style={[
+        flex_row_center,
+        justify_content_center,
+        flex_wrap,
+        mt_8,
+        gap_3,
+        row_gap_5,
+      ]}>
       {days.map(day => (
         <Text
           key={day}
-          style={[row, text_align_center, fs_s, text_grey_300, mb_4]}>
+          style={[row, text_align_center, fs_s, text_grey_300, mb_7]}>
           {day}
         </Text>
       ))}
