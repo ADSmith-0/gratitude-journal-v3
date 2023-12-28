@@ -22,6 +22,8 @@ const MonthSelector = () => {
   const dateProcessor = new DateProcessor(date);
   const today = new DateProcessor();
 
+  const isFuture = dateProcessor.getMonthYear() === today.getMonthYear();
+
   const leftChevron = (pressed: boolean) => (
     <ChevronLeft
       color={pressed ? colours.grey[500] : colours.grey[100]}
@@ -35,11 +37,7 @@ const MonthSelector = () => {
 
     return (
       <ChevronRight
-        color={
-          dateProcessor.getMonthYear() === today.getMonthYear()
-            ? hiddenColour
-            : visibleColour
-        }
+        color={isFuture ? hiddenColour : visibleColour}
         size={fontSize.l}
       />
     );
@@ -64,7 +62,7 @@ const MonthSelector = () => {
         icon={rightChevron}
         variant="tertiary"
         onPress={() => dispatch("nextMonth")}
-        disabled={dateProcessor.getMonthYear() === today.getMonthYear()}
+        disabled={isFuture}
       />
     </View>
   );
