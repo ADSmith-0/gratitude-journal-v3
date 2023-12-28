@@ -27,8 +27,6 @@ type Props = {
   textStyle?: StyleProp<TextStyle>;
 } & PressableProps;
 
-// TODO: Clean up this component
-
 const Button = ({
   title,
   icon,

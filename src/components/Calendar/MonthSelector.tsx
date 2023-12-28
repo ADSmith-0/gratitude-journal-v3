@@ -18,7 +18,6 @@ import Button from "src/components/UI/Button";
 import DateProcessor from "src/utils/DateProcessor";
 
 const MonthSelector = () => {
-  // TODO: Change Button allow for hiding next button
   const { date, dispatch } = useContext(DateContext);
   const dateProcessor = new DateProcessor(date);
   const today = new DateProcessor();
