@@ -29,18 +29,21 @@ const MonthSelector = () => {
     />
   );
 
-  const rightChevron = (pressed: boolean) => (
-    <ChevronRight
-      color={
-        dateProcessor.getMonthYear() === today.getMonthYear()
-          ? colours.offWhite
-          : pressed
-          ? colours.grey[500]
-          : colours.grey[100]
-      }
-      size={fontSize.l}
-    />
-  );
+  const rightChevron = (pressed: boolean) => {
+    const hiddenColour = colours.offWhite;
+    const colour = pressed ? colours.grey[500] : colours.grey[100];
+
+    return (
+      <ChevronRight
+        color={
+          dateProcessor.getMonthYear() === today.getMonthYear()
+            ? hiddenColour
+            : colour
+        }
+        size={fontSize.l}
+      />
+    );
+  };
 
   return (
     <View style={[flex_row_center, justify_content_center]}>
