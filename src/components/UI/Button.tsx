@@ -1,4 +1,4 @@
-import { cloneElement, ReactElement } from "react";
+import { ReactElement } from "react";
 import {
   Pressable,
   PressableProps,
@@ -7,7 +7,7 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import { colours, styles } from "src/styles";
+import { styles } from "src/styles";
 const {
   align_self_end,
   br_1,
@@ -21,12 +21,10 @@ const {
 
 type Props = {
   title?: string;
-  icon?: ReactElement;
+  icon?: (pressed: boolean) => ReactElement;
   variant?: "primary" | "secondary" | "tertiary";
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
-  backgroundColour?: ViewStyle["backgroundColor"];
-  backgroundColourPressed?: ViewStyle["backgroundColor"];
 } & PressableProps;
 
 // TODO: Clean up this component
@@ -37,46 +35,41 @@ const Button = ({
   variant = "primary",
   buttonStyle,
   textStyle,
-  backgroundColour,
-  backgroundColourPressed,
   ...props
 }: Props) => {
-  const variantStyle: Record<
+  const buttonStyles: Record<
     typeof variant,
-    Record<
-      "pressed" | "normal",
-      Pick<ViewStyle, "backgroundColor"> & Pick<TextStyle, "color">
-    >
+    Record<"normal" | "pressed", StyleProp<ViewStyle>>
   > = {
     primary: {
-      normal: {
-        backgroundColor: backgroundColour ?? colours.primary[300],
-        color: colours.grey[900],
-      },
-      pressed: {
-        backgroundColor: backgroundColourPressed ?? colours.primary[200],
-        color: colours.grey[900],
-      },
+      normal: [styles.bg_primary_300],
+      pressed: [styles.bg_grey_200],
     },
     secondary: {
-      normal: {
-        backgroundColor: backgroundColour ?? colours.primary[800],
-        color: colours.primary[100],
-      },
-      pressed: {
-        backgroundColor: backgroundColourPressed ?? colours.primary[700],
-        color: colours.primary[100],
-      },
+      normal: [styles.bg_primary_700],
+      pressed: [styles.bg_primary_100],
     },
     tertiary: {
-      normal: {
-        backgroundColor: backgroundColour ?? "transparent",
-        color: colours.primary[100],
-      },
-      pressed: {
-        backgroundColor: backgroundColourPressed ?? "transparent",
-        color: colours.primary[500],
-      },
+      normal: [styles.bg_transparent],
+      pressed: [],
+    },
+  };
+
+  const textStyles: Record<
+    typeof variant,
+    Record<"normal" | "pressed", StyleProp<TextStyle>>
+  > = {
+    primary: {
+      normal: [styles.text_primary_900],
+      pressed: [],
+    },
+    secondary: {
+      normal: [styles.text_primary_100],
+      pressed: [],
+    },
+    tertiary: {
+      normal: [styles.text_primary_100],
+      pressed: [styles.text_primary_500],
     },
   };
 
@@ -90,29 +83,18 @@ const Button = ({
         pv_5,
         ph_3,
         br_1,
-        {
-          backgroundColor:
-            variantStyle[variant][pressed ? "pressed" : "normal"]
-              .backgroundColor,
-        },
+        buttonStyles[variant][pressed ? "pressed" : "normal"],
         buttonStyle,
       ]}
       {...props}>
       {({ pressed }) => (
         <>
-          {icon &&
-            cloneElement(icon, {
-              color:
-                variantStyle[variant][pressed ? "pressed" : "normal"].color,
-            })}
+          {icon?.(pressed)}
           {title && (
             <Text
               style={[
                 fs_m,
-                {
-                  color:
-                    variantStyle[variant][pressed ? "pressed" : "normal"].color,
-                },
+                textStyles[variant][pressed ? "pressed" : "normal"],
                 textStyle,
               ]}>
               {title}

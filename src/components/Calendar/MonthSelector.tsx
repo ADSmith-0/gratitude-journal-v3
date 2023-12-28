@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { View } from "react-native";
 import Text from "src/components/UI/Text";
 import { DateContext } from "src/context/DateContext/DateContext";
-import { fontSize, styles } from "src/styles";
+import { colours, fontSize, styles } from "src/styles";
 const {
   align_items_center,
   flex_1,
@@ -14,8 +14,8 @@ const {
   mb_3,
   mt_3,
 } = styles;
-import DateProcessor from "src/utils/DateProcessor";
 import Button from "src/components/UI/Button";
+import DateProcessor from "src/utils/DateProcessor";
 
 const MonthSelector = () => {
   // TODO: Change Button allow for hiding next button
@@ -23,10 +23,30 @@ const MonthSelector = () => {
   const dateProcessor = new DateProcessor(date);
   const today = new DateProcessor();
 
+  const leftChevron = (pressed: boolean) => (
+    <ChevronLeft
+      color={pressed ? colours.grey[500] : colours.grey[100]}
+      size={fontSize.l}
+    />
+  );
+
+  const rightChevron = (pressed: boolean) => (
+    <ChevronRight
+      color={
+        dateProcessor.getMonthYear() === today.getMonthYear()
+          ? colours.offWhite
+          : pressed
+          ? colours.grey[500]
+          : colours.grey[100]
+      }
+      size={fontSize.l}
+    />
+  );
+
   return (
     <View style={[flex_row_center, justify_content_center]}>
       <Button
-        icon={<ChevronLeft size={20} />}
+        icon={leftChevron}
         variant="tertiary"
         onPress={() => dispatch("prevMonth")}
       />
@@ -39,7 +59,7 @@ const MonthSelector = () => {
         </Text>
       </View>
       <Button
-        icon={<ChevronRight size={fontSize.l} />}
+        icon={rightChevron}
         variant="tertiary"
         onPress={() => dispatch("nextMonth")}
         disabled={dateProcessor.getMonthYear() === today.getMonthYear()}
