@@ -31,14 +31,14 @@ const MonthSelector = () => {
 
   const rightChevron = (pressed: boolean) => {
     const hiddenColour = colours.offWhite;
-    const colour = pressed ? colours.grey[500] : colours.grey[100];
+    const visibleColour = pressed ? colours.grey[500] : colours.grey[100];
 
     return (
       <ChevronRight
         color={
           dateProcessor.getMonthYear() === today.getMonthYear()
             ? hiddenColour
-            : colour
+            : visibleColour
         }
         size={fontSize.l}
       />
