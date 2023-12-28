@@ -40,7 +40,9 @@ class DateProcessor {
   }
 
   getLongDay() {
-    return this.date.toLocaleDateString("en-GB", { weekday: "long" });
+    return this.date
+      .toLocaleDateString("en-GB", { weekday: "long" })
+      .split(",")[0];
   }
 
   getLongMonth() {

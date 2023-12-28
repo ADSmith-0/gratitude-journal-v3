@@ -1,14 +1,14 @@
 // import { useNavigation } from "@react-navigation/native";
-import { CalendarDays } from "lucide-react-native";
 import { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import DaySelector from "src/components/Entry/DaySelector";
 import Button from "src/components/UI/Button";
 import Input from "src/components/UI/Input";
 import { DateContext } from "src/context/DateContext/DateContext";
-import { colours, fontSize, styles } from "src/styles";
+import { colours, styles } from "src/styles";
 import DateProcessor from "src/utils/DateProcessor";
 import EntriesStorage from "src/utils/EntriesStorage";
-const { flex_column, mt_10, ph_10, pl_3 } = styles;
+const { flex_column, mt_10, ph_1, pl_3 } = styles;
 
 const AddScreen = () => {
   const { date } = useContext(DateContext);
@@ -28,14 +28,8 @@ const AddScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[flex_column, ph_10]}>
-      <Input
-        label="Selected Date"
-        icon={<CalendarDays color={colours.grey[100]} size={fontSize.l} />}
-        editable={false}
-        value={dateProcessor.toReadableDate()}
-        onTouchStart={calendarOnTouch}
-      />
+    <SafeAreaView style={[flex_column, ph_1]}>
+      <DaySelector />
       <Input
         label="Entry"
         editable
