@@ -12,6 +12,9 @@ import { colours, dimensions, fontSize, spacing } from "src/styles";
 
 const Tab = createBottomTabNavigator();
 
+// TODO: Get rid of calendar screen
+// TODO: Move calendar screen to a stack nav from add screen
+
 const App = () => (
   <SafeAreaProvider>
     <DateContextProvider>
