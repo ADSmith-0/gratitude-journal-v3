@@ -2,13 +2,12 @@
 import { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DaySelector from "src/components/Entry/DaySelector";
-import Button from "src/components/UI/Button";
 import Input from "src/components/UI/Input";
 import { DateContext } from "src/context/DateContext/DateContext";
 import { colours, styles } from "src/styles";
 import DateProcessor from "src/utils/DateProcessor";
 import EntriesStorage from "src/utils/EntriesStorage";
-const { flex_column, mt_10, ph_1, pl_3 } = styles;
+const { flex_column, ph_1, pl_3 } = styles;
 
 const AddScreen = () => {
   const { date } = useContext(DateContext);
@@ -42,12 +41,6 @@ const AddScreen = () => {
         defaultValue={defaultEntry}
         value={entry}
         onChangeText={text => setEntry(text)}
-      />
-      <Button
-        title="Submit"
-        disabled={defaultEntry === entry || entry === ""} // TODO: Change to error instead of disable
-        onPress={() => EntriesStorage.set(date, entry as string)}
-        buttonStyle={mt_10}
       />
     </SafeAreaView>
   );
