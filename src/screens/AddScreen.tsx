@@ -1,4 +1,3 @@
-// import { useNavigation } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DaySelector from "src/components/Entry/DaySelector";
