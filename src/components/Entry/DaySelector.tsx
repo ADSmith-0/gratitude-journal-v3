@@ -28,11 +28,12 @@ const DaySelector = () => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: bad rule
   useEffect(() => {
-    if (
-      dateProcessor.toReadableDate() === today.toReadableDate() &&
-      currentDay !== "Today"
-    ) {
+    const yesterday = today.prevDay().toReadableDate();
+    today.nextDay();
+    if (dateProcessor.toReadableDate() === today.toReadableDate()) {
       setCurrentDay("Today");
+    } else if (dateProcessor.toReadableDate() === yesterday) {
+      setCurrentDay("Yesterday");
     } else {
       setCurrentDay(dateProcessor.getLongDay());
     }
