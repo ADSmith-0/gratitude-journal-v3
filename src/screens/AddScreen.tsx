@@ -5,21 +5,18 @@ import DaySelector from "src/components/Entry/DaySelector";
 import Input from "src/components/UI/Input";
 import { DateContext } from "src/context/DateContext/DateContext";
 import { colours, styles } from "src/styles";
-import DateProcessor from "src/utils/DateProcessor";
 import EntriesStorage from "src/utils/EntriesStorage";
-const { flex_column, ph_1, pl_3 } = styles;
+const { flex_column, ph_1, pl_8, pt_6, br_0, border_0, bg_offWhite } = styles;
 
 const AddScreen = () => {
   const { date } = useContext(DateContext);
-  const dateProcessor = new DateProcessor(date);
 
-  const [defaultEntry, setDefaultEntry] = useState<string>();
   const [entry, setEntry] = useState<string>();
 
   // const navigation = useNavigation();
 
   useEffect(() => {
-    setDefaultEntry(EntriesStorage.get(date));
+    setEntry(EntriesStorage.get(date));
   }, [date]);
 
   const calendarOnTouch = () => {
@@ -30,15 +27,13 @@ const AddScreen = () => {
     <SafeAreaView style={[flex_column, ph_1]}>
       <DaySelector />
       <Input
-        label="Entry"
         editable
         multiline
-        numberOfLines={10}
+        numberOfLines={23}
         textAlignVertical="top"
-        placeholder="Today I'm grateful for..."
-        placeholderTextColor={colours.grey[700]}
-        style={pl_3}
-        defaultValue={defaultEntry}
+        placeholder="I'm grateful for..."
+        placeholderTextColor={colours.grey[600]}
+        style={[pl_8, pt_6, br_0, border_0, bg_offWhite]}
         value={entry}
         onChangeText={text => setEntry(text)}
       />
