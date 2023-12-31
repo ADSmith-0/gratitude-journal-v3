@@ -22,7 +22,7 @@ type Props = {
   icon?: ReactNode;
 } & TextInputProps;
 
-const Input = ({ icon, label, onTouchStart, style, ...props }: Props) => (
+const Input = ({ icon, label = "", onTouchStart, style, ...props }: Props) => (
   <View style={[mt_8]}>
     {label && <Text style={mb_3}>{label}</Text>}
     {icon ? (
