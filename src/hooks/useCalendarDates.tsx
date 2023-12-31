@@ -74,7 +74,10 @@ const useCalendarDates = () => {
       }
       month.current = currentMonth;
     }
-    // NOTE: Might need a onUnmount call to delete cache in the future
+
+    return () => {
+      cache.current = new Map();
+    };
   }, [date]);
 
   return calendarDates;
