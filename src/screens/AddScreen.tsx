@@ -13,15 +13,18 @@ const AddScreen = () => {
 
   const [entry, setEntry] = useState<string>();
 
-  // const navigation = useNavigation();
-
   useEffect(() => {
     setEntry(EntriesStorage.get(date));
   }, [date]);
 
-  const calendarOnTouch = () => {
-    // navigation.navigate("Calendar");
-  };
+  // biome-ignore lint/correctness/useExhaustiveDependencies: bad rule
+  useEffect(() => {
+    const timeout = setTimeout(
+      () => EntriesStorage.set(date, entry as string),
+      500,
+    );
+    return () => clearTimeout(timeout);
+  }, [entry]);
 
   return (
     <SafeAreaView style={[flex_column, ph_1]}>
