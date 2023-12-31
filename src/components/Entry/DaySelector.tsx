@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import { useContext, useEffect, useState } from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import Text from "src/components/UI/Text";
 import { DateContext } from "src/context/DateContext/DateContext";
 import { colours, fontSize, styles } from "src/styles";
@@ -14,13 +14,18 @@ const {
   mb_3,
   mt_3,
 } = styles;
+import { useNavigation } from "@react-navigation/native";
 import Button from "src/components/UI/Button";
 import DateProcessor from "src/utils/DateProcessor";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const DaySelector = () => {
   const { date, dispatch } = useContext(DateContext);
   const dateProcessor = new DateProcessor(date);
   const today = new DateProcessor();
+
+  const navigation =
+    useNavigation<StackNavigationProp<{ Calendar: undefined }, "Calendar">>();
 
   const isFuture = dateProcessor.toReadableDate() === today.toReadableDate();
 
@@ -65,14 +70,16 @@ const DaySelector = () => {
         variant="tertiary"
         onPress={() => dispatch("prevDay")}
       />
-      <View style={[flex_column_center, align_items_center, flex_1, mt_3]}>
+      <Pressable
+        onPress={() => navigation.navigate("Calendar")}
+        style={[flex_column_center, align_items_center, flex_1, mt_3]}>
         <Text variant="secondary" style={[m_5, mb_3]}>
-          {dateProcessor.toReadableDate()}
-        </Text>
-        <Text size="l" style={m_5}>
           {currentDay}
         </Text>
-      </View>
+        <Text size="l" style={m_5}>
+          {dateProcessor.toReadableDate()}
+        </Text>
+      </Pressable>
       <Button
         icon={rightChevron}
         variant="tertiary"
