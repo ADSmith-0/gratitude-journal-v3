@@ -6,25 +6,37 @@ type Props = {
   children: ReactNode;
 };
 
-export type Action = "nextDay" | "prevDay" | "nextMonth" | "prevMonth";
+export type Options =
+  | { action: "setDate"; newDate: number }
+  | { action: "nextDay" | "prevDay" | "nextMonth" | "prevMonth" };
 
 const DateContextProvider = ({ children }: Props) => {
-  const reducer = (currentDate: number, action: Action): number => {
+  const reducer = (currentDate: number, options: Options): number => {
     const date = new DateProcessor(currentDate);
+    const { action } = options;
 
     switch (action) {
-      case "nextDay":
+      case "setDate": {
+        const { newDate } = options;
+        const newDateProcessor = new DateProcessor(newDate);
+        return newDateProcessor.getValue();
+      }
+      case "nextDay": {
         date.nextDay();
         break;
-      case "prevDay":
+      }
+      case "prevDay": {
         date.prevDay();
         break;
-      case "nextMonth":
+      }
+      case "nextMonth": {
         date.nextMonth();
         break;
-      case "prevMonth":
+      }
+      case "prevMonth": {
         date.prevMonth();
         break;
+      }
     }
 
     return date.getValue();

@@ -48,7 +48,7 @@ const MonthSelector = () => {
       <Button
         icon={leftChevron}
         variant="tertiary"
-        onPress={() => dispatch("prevMonth")}
+        onPress={() => dispatch({ action: "prevMonth" })}
       />
       <View style={[flex_column_center, align_items_center, flex_1, mt_3]}>
         <Text variant="secondary" style={[m_5, mb_3]}>
@@ -61,7 +61,7 @@ const MonthSelector = () => {
       <Button
         icon={rightChevron}
         variant="tertiary"
-        onPress={() => dispatch("nextMonth")}
+        onPress={() => dispatch({ action: "nextMonth" })}
         disabled={isFuture}
       />
     </View>
