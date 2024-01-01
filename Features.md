@@ -4,4 +4,6 @@
 - Entries tab
 - Account tab
 - Push notifications
-- Synchronisation (encyption)
+- Be able to back up to cloud
+- Encryption before backing up to the cloud
+- Globalisation (use something other than "en-GB" for string formatting)
