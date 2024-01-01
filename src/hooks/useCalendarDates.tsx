@@ -55,29 +55,31 @@ const useCalendarDates = () => {
   const { date } = useContext(DateContext);
   const [calendarDates, setCalendarDates] = useState<calendarDate[]>([]);
   const month = useRef<number>();
-  const cache = useRef(new Map());
+  // const cache = useRef(new Map());
 
   useEffect(() => {
     const dateProcessor = new DateProcessor(date);
     const currentMonth = dateProcessor.date.getMonth();
-    const monthYear = dateProcessor.getMonthYear();
+    // const monthYear = dateProcessor.getMonthYear();
 
     if (currentMonth !== month.current) {
-      if (cache.current.has(monthYear)) {
-        setCalendarDates(cache.current.get(monthYear));
-      } else {
-        const calendarMonth: calendarDate[] = calculateMonth(dateProcessor);
-        setCalendarDates(calendarMonth);
-        if (cache.current.size < 10) {
-          cache.current.set(monthYear, calendarMonth);
-        }
-      }
-      month.current = currentMonth;
+      const calendarMonth: calendarDate[] = calculateMonth(dateProcessor);
+      setCalendarDates(calendarMonth);
+      //   if (cache.current.has(monthYear)) {
+      //     setCalendarDates(cache.current.get(monthYear));
+      //   } else {
+      //     const calendarMonth: calendarDate[] = calculateMonth(dateProcessor);
+      //     setCalendarDates(calendarMonth);
+      //     if (cache.current.size < 10) {
+      //       cache.current.set(monthYear, calendarMonth);
+      //     }
+      //   }
+      //   month.current = currentMonth;
     }
 
-    return () => {
-      cache.current = new Map();
-    };
+    // return () => {
+    //   cache.current = new Map();
+    // };
   }, [date]);
 
   return calendarDates;
