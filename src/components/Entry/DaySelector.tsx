@@ -68,7 +68,7 @@ const DaySelector = () => {
       <Button
         icon={leftChevron}
         variant="tertiary"
-        onPress={() => dispatch("prevDay")}
+        onPress={() => dispatch({ action: "prevDay" })}
       />
       <Pressable
         onPress={() => navigation.navigate("Calendar")}
@@ -83,7 +83,7 @@ const DaySelector = () => {
       <Button
         icon={rightChevron}
         variant="tertiary"
-        onPress={() => dispatch("nextDay")}
+        onPress={() => dispatch({ action: "nextDay" })}
         disabled={isFuture}
       />
     </View>
