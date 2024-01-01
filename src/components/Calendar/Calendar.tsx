@@ -22,6 +22,11 @@ const {
 } = styles;
 import Button from "src/components/UI/Button";
 import { DateTag } from "src/types";
+import { DateContext } from "src/context/DateContext/DateContext";
+import { useContext } from "react";
+import DateProcessor from "src/utils/DateProcessor";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const { row } = StyleSheet.create({
   row: {
@@ -33,7 +38,18 @@ const { row } = StyleSheet.create({
 
 const Calendar = () => {
   const calendarDates = useCalendarDates();
-  // TODO: Change screens to just add screen, autosave, calendar list as part of clicking on date
+
+  const { date, dispatch } = useContext(DateContext);
+
+  const navigation =
+    useNavigation<StackNavigationProp<{ Tabs: undefined }, "Tabs">>();
+
+  const updateDate = (currentDate: number): void => {
+    const newDate = new DateProcessor(date);
+    newDate.date.setDate(currentDate);
+    dispatch({ action: "setDate", newDate: newDate.getValue() });
+    navigation.navigate("Tabs");
+  };
 
   return (
     <View
@@ -52,12 +68,12 @@ const Calendar = () => {
           {day}
         </Text>
       ))}
-      {calendarDates.map(({ date, dateTag, hasEntry }, i) =>
-        date === " " ? (
-          <Text key={`${date}${i}`} style={row} />
+      {calendarDates.map(({ date: currentDate, dateTag, hasEntry }, i) =>
+        currentDate === " " ? (
+          <Text key={`${currentDate}${i}`} style={row} />
         ) : (
           <Button
-            key={date}
+            key={currentDate}
             variant="tertiary"
             buttonStyle={[row, pv_3, hasEntry && bg_primary_800]}
             textStyle={[
@@ -65,7 +81,8 @@ const Calendar = () => {
               text_bold,
               dateTag === DateTag.INVALID && text_grey_800,
             ]}
-            title={date}
+            onPress={() => updateDate(+currentDate)}
+            title={currentDate}
           />
         ),
       )}
