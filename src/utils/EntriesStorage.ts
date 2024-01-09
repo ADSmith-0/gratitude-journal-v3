@@ -18,14 +18,14 @@ class EntriesStorage {
     });
   }
 
-  set(date: number, value: string) {
+  set(epoch: number, value: string) {
     MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
       if (error) {
         console.error(error);
         return;
       }
 
-      const dateProcessor = new DateProcessor(date);
+      const dateProcessor = new DateProcessor(epoch);
       const monthYear = dateProcessor.getMonthYear();
       const currentDate = dateProcessor.date.getDate();
 
@@ -39,10 +39,10 @@ class EntriesStorage {
     });
   }
 
-  get(date: number): string | undefined {
+  get(epoch: number): string | undefined {
     const entries: Entries = MMKV.getMap<Entries>(this.entriesKey);
 
-    const dateProcessor = new DateProcessor(date);
+    const dateProcessor = new DateProcessor(epoch);
     const monthYear = dateProcessor.getMonthYear();
     const currentDate = dateProcessor.date.getDate();
 
@@ -53,9 +53,9 @@ class EntriesStorage {
     return undefined;
   }
 
-  getMonth(date: number): Record<string, string> | undefined {
+  getMonth(epoch: number): Record<string, string> | undefined {
     const entries: Entries = MMKV.getMap<Entries>(this.entriesKey);
-    const dateProcessor = new DateProcessor(date);
+    const dateProcessor = new DateProcessor(epoch);
     const monthYear = dateProcessor.getMonthYear();
 
     if (entries?.[monthYear]) {
