@@ -3,9 +3,9 @@ import { DateString, MonthYear } from "src/types";
 class DateProcessor {
   public date;
 
-  constructor(date?: number) {
-    if (date) {
-      this.date = new Date(date);
+  constructor(epoch?: number) {
+    if (epoch) {
+      this.date = new Date(epoch);
     } else {
       this.date = new Date();
     }
