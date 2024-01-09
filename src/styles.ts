@@ -61,6 +61,8 @@ export const dimensions = {
 };
 
 export const styles = StyleSheet.create({
+  absolute: { position: "absolute" },
+  relative: { position: "relative" },
   flex_row: { display: "flex", flexDirection: "row" },
   flex_row_center: {
     display: "flex",
@@ -230,6 +232,17 @@ export const styles = StyleSheet.create({
   mv_8: { marginVertical: spacing[8] },
   mv_9: { marginVertical: spacing[9] },
   mv_10: { marginVertical: spacing[10] },
+  right_0: { right: 0 },
+  right_1: { right: dimensions[1] },
+  right_2: { right: dimensions[2] },
+  right_3: { right: dimensions[3] },
+  right_4: { right: dimensions[4] },
+  right_5: { right: dimensions[5] },
+  right_6: { right: dimensions[6] },
+  right_7: { right: dimensions[7] },
+  right_8: { right: dimensions[8] },
+  right_9: { right: dimensions[9] },
+  right_10: { right: dimensions[10] },
   bg_offWhite: { backgroundColor: colours.offWhite },
   bg_grey_100: { backgroundColor: colours.grey[100] },
   bg_grey_200: { backgroundColor: colours.grey[200] },
