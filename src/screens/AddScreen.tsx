@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import DaySelector from "src/components/Entry/DaySelector";
+import ContentWrapper from "src/components/Screen/ContentWrapper";
 import Input from "src/components/UI/Input";
 import { DateContext } from "src/context/DateContext/DateContext";
 import { colours, styles } from "src/styles";
@@ -26,7 +26,7 @@ const AddScreen = () => {
   }, [entry]);
 
   return (
-    <SafeAreaView style={[flex_column, ph_1]}>
+    <ContentWrapper style={[flex_column, ph_1]}>
       <DaySelector />
       <Input
         editable
@@ -39,7 +39,7 @@ const AddScreen = () => {
         value={entry}
         onChangeText={text => setEntry(text)}
       />
-    </SafeAreaView>
+    </ContentWrapper>
   );
 };
 
