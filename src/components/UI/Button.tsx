@@ -10,12 +10,20 @@ import {
 import { styles } from "src/styles";
 const {
   align_self_end,
+  bg_primary_100,
+  bg_primary_200,
+  bg_primary_300,
+  bg_primary_700,
+  bg_transparent,
   br_1,
   flex_row_center,
   fs_m,
   justify_content_center,
   pv_5,
   ph_3,
+  text_primary_100,
+  text_primary_500,
+  text_primary_900,
   w_3,
 } = styles;
 
@@ -40,15 +48,15 @@ const Button = ({
     Record<"normal" | "pressed", StyleProp<ViewStyle>>
   > = {
     primary: {
-      normal: [styles.bg_primary_300],
-      pressed: [styles.bg_grey_200],
+      normal: [bg_primary_300],
+      pressed: [bg_primary_200],
     },
     secondary: {
-      normal: [styles.bg_primary_700],
-      pressed: [styles.bg_primary_100],
+      normal: [bg_primary_700],
+      pressed: [bg_primary_100],
     },
     tertiary: {
-      normal: [styles.bg_transparent],
+      normal: [bg_transparent],
       pressed: [],
     },
   };
@@ -58,16 +66,16 @@ const Button = ({
     Record<"normal" | "pressed", StyleProp<TextStyle>>
   > = {
     primary: {
-      normal: [styles.text_primary_900],
+      normal: [text_primary_900],
       pressed: [],
     },
     secondary: {
-      normal: [styles.text_primary_100],
+      normal: [text_primary_100],
       pressed: [],
     },
     tertiary: {
-      normal: [styles.text_primary_100],
-      pressed: [styles.text_primary_500],
+      normal: [text_primary_100],
+      pressed: [text_primary_500],
     },
   };
 
