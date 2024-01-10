@@ -11,7 +11,6 @@ const {
   fs_m,
   mb_3,
   mb_4,
-  mt_8,
   pl_4,
   p_2,
   text_grey_100,
@@ -23,7 +22,7 @@ type Props = {
 } & TextInputProps;
 
 const Input = ({ icon, label = "", onTouchStart, style, ...props }: Props) => (
-  <View style={[mt_8]}>
+  <View>
     {label && <Text style={mb_3}>{label}</Text>}
     {icon ? (
       <View
