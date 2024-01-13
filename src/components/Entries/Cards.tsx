@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { VirtualizedList } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Card from "src/components/Entries/Card";
 import { styles } from "src/styles";
 import { DateString, Entries } from "src/types";
