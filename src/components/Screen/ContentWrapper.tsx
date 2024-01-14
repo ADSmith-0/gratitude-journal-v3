@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { bottomTabBarHeight } from "src/utils/globals";
 
 type Props = {
   style?: StyleProp<ViewStyle>;
@@ -18,6 +17,7 @@ const ContentWrapper = ({ style, children }: Props) => {
           marginLeft: insets.left,
           marginRight: insets.right,
           marginBottom: insets.bottom + bottomTabBarHeight,
+          paddingBottom: insets.bottom,
         },
         style,
       ]}>

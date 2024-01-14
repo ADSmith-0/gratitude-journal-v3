@@ -9,8 +9,7 @@ import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
 import CalendarScreen from "src/screens/CalendarScreen";
 import EntriesScreen from "src/screens/EntriesScreen";
-import { colours, fontSize, spacing } from "src/styles";
-import { bottomTabBarHeight } from "src/utils/globals";
+import { colours, dimensions, fontSize, spacing } from "src/styles";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +24,7 @@ const Tabs = () => (
       tabBarHideOnKeyboard: true,
       tabBarActiveBackgroundColor: colours.primary[900],
       tabBarStyle: {
-        height: bottomTabBarHeight,
+        height: dimensions[3],
       },
       tabBarIconStyle: {
         marginTop: spacing[3],
