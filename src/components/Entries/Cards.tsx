@@ -13,7 +13,7 @@ const Cards = () => {
   for (const monthEntry of Object.entries(entries)) {
     const [monthYear, dates] = monthEntry;
 
-    if (!dates.size) {
+    if (Object.keys(dates).length) {
       const [month, year] = monthYear.split("/");
 
       for (const entry of Object.entries(dates)) {
