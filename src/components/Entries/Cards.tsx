@@ -5,6 +5,7 @@ import { styles } from "src/styles";
 import { DateString, Entries } from "src/types";
 import DateProcessor from "src/utils/DateProcessor";
 import EntriesStorage from "src/utils/EntriesStorage";
+const { bg_offWhite, flex_1, gap_5, ph_5 } = styles;
 
 const Cards = () => {
   const [entries] = useState<Entries>(EntriesStorage.getAll());
@@ -41,7 +42,7 @@ const Cards = () => {
       }: {
         item: { date: DateString; entryText: string };
       }) => <Card key={item.date} date={item.date} entry={item.entryText} />}
-      style={[styles.gap_5, styles.ph_7, styles.bg_offWhite]}
+      style={[flex_1, gap_5, ph_5, bg_offWhite]}
     />
   );
 };

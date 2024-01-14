@@ -6,7 +6,8 @@ import ContentWrapper from "src/components/Screen/ContentWrapper";
 import Button from "src/components/UI/Button";
 import Input from "src/components/UI/Input";
 import { colours, fontSize, styles } from "src/styles";
-const { absolute, pl_5, mh_5, mv_8 } = styles;
+const { absolute, flex_1, flex_column_center, gap_5, pl_5, mb_4, mh_5, mt_8 } =
+  styles;
 
 const EntriesScreen = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -19,8 +20,8 @@ const EntriesScreen = () => {
   );
 
   return (
-    <ContentWrapper>
-      <View style={mv_8}>
+    <ContentWrapper style={[flex_column_center, gap_5, flex_1]}>
+      <View style={[mt_8, mb_4]}>
         <Input placeholder="Search" style={[mh_5, pl_5]} />
         <Button buttonStyle={absolute} variant="tertiary" icon={searchIcon} />
       </View>
