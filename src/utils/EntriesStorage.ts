@@ -2,45 +2,27 @@ import { Entries } from "src/types";
 import DateProcessor from "src/utils/DateProcessor";
 import MMKV from "src/utils/MMKV";
 
-class EntriesStorage {
-  private entriesKey = "entries";
+const entriesKey = "entries";
 
-  constructor() {
-    MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
+const EntriesStorage = {
+  set: (epoch: number, value: string) => {
+    const entries: Entries = MMKV.getMap<Entries>(entriesKey) ?? {};
 
-      if (entries === null) {
-        MMKV.setMap(this.entriesKey, {});
-      }
-    });
-  }
+    const dateProcessor = new DateProcessor(epoch);
+    const monthYear = dateProcessor.getMonthYear();
+    const currentDate = dateProcessor.date.getDate();
 
-  set(epoch: number, value: string) {
-    MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
+    if (!entries[monthYear]) {
+      entries[monthYear] = {};
+    }
 
-      const dateProcessor = new DateProcessor(epoch);
-      const monthYear = dateProcessor.getMonthYear();
-      const currentDate = dateProcessor.date.getDate();
+    entries[monthYear][currentDate] = value;
 
-      if (!entries[monthYear]) {
-        entries[monthYear] = {};
-      }
+    MMKV.setMap(entriesKey, entries);
+  },
 
-      entries[monthYear][currentDate] = value;
-
-      MMKV.setMap(this.entriesKey, entries);
-    });
-  }
-
-  get(epoch: number): string | undefined {
-    const entries: Entries = MMKV.getMap<Entries>(this.entriesKey);
+  get: (epoch: number): string | undefined => {
+    const entries: Entries = MMKV.getMap<Entries>(entriesKey);
 
     const dateProcessor = new DateProcessor(epoch);
     const monthYear = dateProcessor.getMonthYear();
@@ -51,10 +33,10 @@ class EntriesStorage {
     }
 
     return undefined;
-  }
+  },
 
-  getMonth(epoch: number): Record<string, string> | undefined {
-    const entries: Entries = MMKV.getMap<Entries>(this.entriesKey);
+  getMonth: (epoch: number): Record<string, string> | undefined => {
+    const entries: Entries = MMKV.getMap<Entries>(entriesKey);
     const dateProcessor = new DateProcessor(epoch);
     const monthYear = dateProcessor.getMonthYear();
 
@@ -63,36 +45,17 @@ class EntriesStorage {
     }
 
     return undefined;
-  }
+  },
 
-  getAll(): Entries {
-    return MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
+  getAll: (): Entries => MMKV.getMap(entriesKey),
 
-      return entries;
-    });
-  }
+  remove: (epoch: number) => {
+    const entries: Entries = MMKV.getMap<Entries>(entriesKey);
+    const dateProcessor = new DateProcessor(epoch);
+    delete entries[dateProcessor.getMonthYear()][dateProcessor.date.getDate()];
 
-  remove(date: number) {
-    MMKV.getMap(this.entriesKey, (error, entries: Entries) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
+    return MMKV.setMap(entriesKey, entries);
+  },
+};
 
-      const dateProcessor = new DateProcessor(date);
-      delete entries[dateProcessor.getMonthYear()][
-        dateProcessor.date.getDate()
-      ];
-
-      MMKV.setMap(this.entriesKey, entries);
-    });
-  }
-}
-
-const EntriesStorageInstance = new EntriesStorage();
-
-export default EntriesStorageInstance;
+export default EntriesStorage;
