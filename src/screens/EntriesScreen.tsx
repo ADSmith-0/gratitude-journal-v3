@@ -19,6 +19,10 @@ const EntriesScreen = () => {
     />
   );
 
+  // TODO: Get search bar working
+  // NOTE: Add filters/sorting?
+  // NOTE: Change to Insights panel? analytics, commonly used words/terms etc.
+
   return (
     <ContentWrapper style={[flex_column_center, gap_5, flex_1]}>
       <View style={[mt_8, mb_4]}>
