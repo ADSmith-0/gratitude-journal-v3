@@ -14,7 +14,6 @@ import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
 import CalendarScreen from "src/screens/CalendarScreen";
 import EntriesScreen from "src/screens/EntriesScreen";
-
 import { colours, dimensions, fontSize, spacing } from "src/styles";
 
 const Tab = createBottomTabNavigator();
