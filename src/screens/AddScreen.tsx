@@ -8,7 +8,6 @@ import EntriesStorage from "src/utils/EntriesStorage";
 const { flex_column, ph_1, pl_8, pt_6, br_0, border_0, bg_offWhite } = styles;
 
 const AddScreen = () => {
-  // FIX: Have it remove entries when the entry is deleted
   const { date } = useContext(DateContext);
 
   const [entry, setEntry] = useState<string>("");
