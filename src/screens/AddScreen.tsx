@@ -11,18 +11,21 @@ const AddScreen = () => {
   // FIX: Have it remove entries when the entry is deleted
   const { date } = useContext(DateContext);
 
-  const [entry, setEntry] = useState<string>();
+  const [entry, setEntry] = useState<string>("");
 
   useEffect(() => {
-    setEntry(EntriesStorage.get(date));
+    setEntry(EntriesStorage.get(date) ?? "");
   }, [date]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: bad rule
   useEffect(() => {
-    const timeout = setTimeout(
-      () => EntriesStorage.set(date, entry as string),
-      500,
-    );
+    const timeout = setTimeout(() => {
+      if (entry) {
+        EntriesStorage.set(date, entry as string);
+      } else {
+        EntriesStorage.remove(date);
+      }
+    }, 500);
     return () => clearTimeout(timeout);
   }, [entry]);
 

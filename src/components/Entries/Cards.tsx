@@ -23,9 +23,7 @@ const Cards = () => {
           new Date(+year, +month - 1, +date).valueOf(),
         ).toReadableDate();
 
-        if (entryText) {
-          entriesList.push({ date: readableDate, entryText });
-        }
+        entriesList.push({ date: readableDate, entryText });
       }
     }
   }
