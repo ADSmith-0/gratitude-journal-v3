@@ -74,8 +74,7 @@ const Stack = createStackNavigator<{ Tabs: undefined; Calendar: undefined }>();
 const App = () => {
   useOnMount(() => {
     // TODO: Add icon to notifications
-    // TODO: Figure out how to send them at a certain time
-    // TODO: Maybe make it so that the user can control the time?
+    // TODO: Change this to use notifee interval triggers instead
     messaging().setBackgroundMessageHandler(
       (message: FirebaseMessagingTypes.RemoteMessage) =>
         notifee.displayNotification(
