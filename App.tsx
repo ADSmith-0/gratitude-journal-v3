@@ -2,13 +2,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { List, Plus, User2 } from "lucide-react-native";
+import { List, Plus, Settings, User2 } from "lucide-react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import Button from "src/components/UI/Button";
 import DateContextProvider from "src/context/DateContext/DateContextProvider";
 import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
 import CalendarScreen from "src/screens/CalendarScreen";
 import EntriesScreen from "src/screens/EntriesScreen";
+import SettingsScreen from "src/screens/SettingsScreen";
 import { colours, dimensions, fontSize, spacing } from "src/styles";
 import notifications from "src/utils/Notifications";
 
@@ -21,7 +23,7 @@ const Tabs = () => (
     sceneContainerStyle={{
       backgroundColor: colours.offWhite,
     }}
-    screenOptions={{
+    screenOptions={({ navigation }) => ({
       tabBarActiveTintColor: colours.primary[100],
       tabBarInactiveTintColor: colours.primary[500],
       tabBarHideOnKeyboard: true,
@@ -36,7 +38,19 @@ const Tabs = () => (
         fontSize: fontSize.s,
         paddingBottom: spacing[6],
       },
-    }}>
+      headerRight: () => (
+        <Button
+          icon={(pressed: boolean) => (
+            <Settings
+              color={colours.grey[pressed ? 300 : 100]}
+              size={fontSize.l}
+            />
+          )}
+          variant="tertiary"
+          onPress={() => navigation.navigate("Settings")}
+        />
+      ),
+    })}>
     <Tab.Screen
       name="Add"
       component={AddScreen}
@@ -67,7 +81,11 @@ const Tabs = () => (
   </Tab.Navigator>
 );
 
-const Stack = createStackNavigator<{ Tabs: undefined; Calendar: undefined }>();
+const Stack = createStackNavigator<{
+  Tabs: undefined;
+  Settings: undefined;
+  Calendar: undefined;
+}>();
 
 const App = () => (
   <SafeAreaProvider>
@@ -77,7 +95,14 @@ const App = () => (
           <Stack.Screen
             name="Tabs"
             component={Tabs}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{ cardStyle: { backgroundColor: colours.offWhite } }}
           />
           <Stack.Screen
             name="Calendar"
