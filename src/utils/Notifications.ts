@@ -17,13 +17,16 @@ function notifications() {
     });
 
     const dateProcessor = new DateProcessor();
-    dateProcessor.date.setHours(19);
-    dateProcessor.date.setMinutes(1);
+    dateProcessor.date.setHours(14);
+    dateProcessor.date.setMinutes(50);
 
     const trigger: TimestampTrigger = {
       type: TriggerType.TIMESTAMP,
       timestamp: dateProcessor.date.getTime(),
       repeatFrequency: RepeatFrequency.DAILY,
+      alarmManager: {
+        allowWhileIdle: true,
+      },
     };
 
     await notifee.createTriggerNotification(
