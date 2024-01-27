@@ -17,6 +17,7 @@ function notifications() {
     });
 
     const dateProcessor = new DateProcessor();
+    dateProcessor.nextDay();
     dateProcessor.date.setHours(14);
     dateProcessor.date.setMinutes(50);
 
