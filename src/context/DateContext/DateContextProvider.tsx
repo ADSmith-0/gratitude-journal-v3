@@ -1,14 +1,10 @@
 import { ReactNode, useReducer } from "react";
-import { DateContext } from "src/context/DateContext/DateContext";
+import { DateContext, Options } from "src/context/DateContext/DateContext";
 import DateProcessor from "src/utils/DateProcessor";
 
 type Props = {
   children: ReactNode;
 };
-
-export type Options =
-  | { action: "setDate"; newDate: number }
-  | { action: "nextDay" | "prevDay" | "nextMonth" | "prevMonth" };
 
 const DateContextProvider = ({ children }: Props) => {
   const reducer = (currentDate: number, options: Options): number => {
