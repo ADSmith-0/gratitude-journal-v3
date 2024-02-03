@@ -6,6 +6,7 @@ import { List, Plus, Settings, User2 } from "lucide-react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Button from "src/components/UI/Button";
 import DateContextProvider from "src/context/DateContext/DateContextProvider";
+import NotificationsEnabledContextProvider from "src/context/NotificationsEnabledContext/NotificationsEnabledProvider";
 import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
 import CalendarScreen from "src/screens/CalendarScreen";
@@ -90,27 +91,29 @@ const Stack = createStackNavigator<{
 const App = () => (
   <SafeAreaProvider>
     <DateContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Tabs"
-            component={Tabs}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="Settings"
-            component={SettingsScreen}
-            options={{ cardStyle: { backgroundColor: colours.offWhite } }}
-          />
-          <Stack.Screen
-            name="Calendar"
-            component={CalendarScreen}
-            options={{ cardStyle: { backgroundColor: colours.offWhite } }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <NotificationsEnabledContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Tabs"
+              component={Tabs}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={SettingsScreen}
+              options={{ cardStyle: { backgroundColor: colours.offWhite } }}
+            />
+            <Stack.Screen
+              name="Calendar"
+              component={CalendarScreen}
+              options={{ cardStyle: { backgroundColor: colours.offWhite } }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NotificationsEnabledContextProvider>
     </DateContextProvider>
   </SafeAreaProvider>
 );
