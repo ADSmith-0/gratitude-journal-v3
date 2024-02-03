@@ -52,9 +52,13 @@ const EntriesStorage = {
   remove: (epoch: number) => {
     const entries: Entries = MMKV.getMap<Entries>(entriesKey);
     const dateProcessor = new DateProcessor(epoch);
-    delete entries[dateProcessor.getMonthYear()][dateProcessor.date.getDate()];
+    if (entries?.[dateProcessor.getMonthYear()]) {
+      delete entries[dateProcessor.getMonthYear()][
+        dateProcessor.date.getDate()
+      ];
+    }
 
-    return MMKV.setMap(entriesKey, entries);
+    return MMKV.setMap(entriesKey, entries ?? {});
   },
 };
 
