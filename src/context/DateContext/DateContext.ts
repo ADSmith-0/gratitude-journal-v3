@@ -1,6 +1,9 @@
 import { Dispatch, createContext } from "react";
 import DateProcessor from "src/utils/DateProcessor";
-import { Options } from "src/context/DateContext/DateContextProvider";
+
+export type Options =
+  | { action: "setDate"; newDate: number }
+  | { action: "nextDay" | "prevDay" | "nextMonth" | "prevMonth" };
 
 type IDateContext = {
   date: number;
