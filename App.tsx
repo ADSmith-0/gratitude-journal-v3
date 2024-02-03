@@ -6,7 +6,7 @@ import { List, Plus, Settings, User2 } from "lucide-react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Button from "src/components/UI/Button";
 import DateContextProvider from "src/context/DateContext/DateContextProvider";
-import NotificationsEnabledContextProvider from "src/context/NotificationsEnabledContext/NotificationsEnabledProvider";
+import ReminderContextProvider from "src/context/ReminderContext/ReminderContextProvider";
 import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
 import CalendarScreen from "src/screens/CalendarScreen";
@@ -91,7 +91,7 @@ const Stack = createStackNavigator<{
 const App = () => (
   <SafeAreaProvider>
     <DateContextProvider>
-      <NotificationsEnabledContextProvider>
+      <ReminderContextProvider>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
@@ -113,7 +113,7 @@ const App = () => (
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </NotificationsEnabledContextProvider>
+      </ReminderContextProvider>
     </DateContextProvider>
   </SafeAreaProvider>
 );
