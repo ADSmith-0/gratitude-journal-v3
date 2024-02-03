@@ -84,6 +84,7 @@ export const styles = StyleSheet.create({
   align_self_end: { alignSelf: "flex-end" },
   justify_content_center: { justifyContent: "center" },
   justify_content_around: { justifyContent: "space-around" },
+  justify_content_between: { justifyContent: "space-between" },
   br_0: { borderRadius: 0 },
   br_1: { borderRadius: 5 },
   border_0: { borderWidth: 0 },
