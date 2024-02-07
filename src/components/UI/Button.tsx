@@ -85,7 +85,6 @@ const Button = ({
         w_3,
         flex_row_center,
         justify_content_center,
-        align_self_end,
         pv_5,
         ph_3,
         br_1,
