@@ -1,31 +1,41 @@
 import { ReactNode, useReducer } from "react";
-import { Reminder, ReminderContext, Options } from "./ReminderContext";
+import DateProcessor from "src/utils/DateProcessor";
+import { removeReminder, setReminder } from "src/utils/Reminder";
+import { Options, Reminder, ReminderContext } from "./ReminderContext";
 
 type Props = {
   children: ReactNode;
 };
 
+const newTime = (): DateProcessor => {
+  const dateProcessor = new DateProcessor();
+  dateProcessor.date.setTime(dateProcessor.date.getTime() + 1 * 60 * 1000);
+  return dateProcessor;
+};
 const ReminderContextProvider = ({ children }: Props) => {
   const reducer = (reminder: Reminder, options: Options): Reminder => {
-    const newReminder = structuredClone(reminder);
+    const newReminder = { ...reminder };
     const { action } = options;
 
     switch (action) {
       case "setTime": {
+        setReminder(options.time);
         newReminder.time = options.time;
         break;
       }
       case "enable": {
+        setReminder(reminder.time ?? newTime());
         newReminder.isEnabled = true;
         break;
       }
       case "disable": {
+        removeReminder();
         newReminder.isEnabled = false;
         break;
       }
     }
 
-    return reminder;
+    return newReminder;
   };
 
   const [reminder, dispatch] = useReducer(reducer, {
