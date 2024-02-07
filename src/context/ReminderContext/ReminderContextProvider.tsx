@@ -7,11 +7,6 @@ type Props = {
   children: ReactNode;
 };
 
-const newTime = (): DateProcessor => {
-  const dateProcessor = new DateProcessor();
-  dateProcessor.date.setTime(dateProcessor.date.getTime() + 1 * 60 * 1000);
-  return dateProcessor;
-};
 const ReminderContextProvider = ({ children }: Props) => {
   const reducer = (reminder: Reminder, options: Options): Reminder => {
     const newReminder = { ...reminder };
