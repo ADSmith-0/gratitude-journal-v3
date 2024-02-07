@@ -1,12 +1,13 @@
 import { Dispatch, createContext } from "react";
+import DateProcessor from "src/utils/DateProcessor";
 
 export type Reminder = {
   isEnabled: boolean;
-  time: string | undefined;
+  time: DateProcessor | undefined;
 };
 
 export type Options =
-  | { action: "setTime"; time: string }
+  | { action: "setTime"; time: DateProcessor }
   | { action: "enable" | "disable" };
 
 // TODO: Maybe change time to `${number}:${number}`?
@@ -18,7 +19,7 @@ export type IReminderContext = {
 export const ReminderContext = createContext<IReminderContext>({
   reminder: {
     isEnabled: false,
-    time: new Date().toLocaleTimeString(),
+    time: new DateProcessor(),
   },
   dispatch: () => {},
 });
