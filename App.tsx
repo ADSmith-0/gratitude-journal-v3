@@ -13,11 +13,8 @@ import CalendarScreen from "src/screens/CalendarScreen";
 import EntriesScreen from "src/screens/EntriesScreen";
 import SettingsScreen from "src/screens/SettingsScreen";
 import { colours, dimensions, fontSize, spacing } from "src/styles";
-import notifications from "src/utils/Notifications";
 
 const Tab = createBottomTabNavigator();
-
-notifications().setup();
 
 const Tabs = () => (
   <Tab.Navigator
