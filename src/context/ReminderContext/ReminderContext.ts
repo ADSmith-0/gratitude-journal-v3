@@ -3,7 +3,7 @@ import DateProcessor from "src/utils/DateProcessor";
 
 export type Reminder = {
   isEnabled: boolean;
-  time: DateProcessor | undefined;
+  time: DateProcessor;
 };
 
 export type Options =

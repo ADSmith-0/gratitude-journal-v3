@@ -19,7 +19,7 @@ const ReminderContextProvider = ({ children }: Props) => {
         break;
       }
       case "enable": {
-        setReminder(reminder.time ?? newTime());
+        setReminder(reminder.time);
         newReminder.isEnabled = true;
         break;
       }
@@ -33,9 +33,12 @@ const ReminderContextProvider = ({ children }: Props) => {
     return newReminder;
   };
 
+  const nineAMReminder = new DateProcessor();
+  nineAMReminder.date.setHours(9, 0, 0);
+
   const [reminder, dispatch] = useReducer(reducer, {
     isEnabled: false,
-    time: undefined,
+    time: nineAMReminder,
   });
 
   return (
