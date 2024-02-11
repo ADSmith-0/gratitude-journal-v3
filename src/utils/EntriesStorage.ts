@@ -1,6 +1,11 @@
+import { MMKVLoader } from "react-native-mmkv-storage";
 import { Entries } from "src/types";
 import DateProcessor from "src/utils/DateProcessor";
-import MMKV from "src/utils/MMKV";
+
+const MMKV = new MMKVLoader()
+  .withEncryption()
+  .withInstanceID("entries")
+  .initialize();
 
 const entriesKey = "entries";
 
