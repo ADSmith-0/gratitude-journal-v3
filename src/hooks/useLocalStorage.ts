@@ -1,7 +1,3 @@
-import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
-export const MMKV = new MMKVLoader()
-  .withInstanceID("local-storage")
-  .initialize();
 
 const useLocalStorage = (key: string, defaultValue: unknown) => {
   const [value, setValue] = useMMKVStorage(key, MMKV, defaultValue);
