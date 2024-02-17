@@ -15,11 +15,17 @@ const {
   br_1,
   flex_column_center,
   flex_row_center,
+  fs_l,
   justify_content_between,
+  justify_content_start,
+  p_0,
   ph_8,
+  pl_3,
   pv_5,
   mh_7,
   mt_8,
+  text_grey_100,
+  text_grey_500,
 } = styles;
 
 const SettingsScreen = () => {
@@ -43,16 +49,14 @@ const SettingsScreen = () => {
         ph_8,
         mh_7,
       ]}>
-      <Text style={[styles.pl_3]}>Reminder</Text>
+      <Text style={pl_3}>Reminder</Text>
       <View style={[flex_row_center, justify_content_between]}>
         <Button
           variant="tertiary"
-          buttonStyle={[styles.justify_content_start, styles.p_0]}
+          buttonStyle={[justify_content_start, p_0]}
           textStyle={[
-            styles.fs_l,
-            reminderConfig.isEnabled
-              ? styles.text_grey_100
-              : styles.text_grey_500,
+            fs_l,
+            reminderConfig.isEnabled ? text_grey_100 : text_grey_500,
           ]}
           title={new Date(reminderConfig.time).toTimeString().slice(0, 5)}
           onPress={() => setIsTimePickerVisible(true)}
