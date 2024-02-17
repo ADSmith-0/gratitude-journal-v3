@@ -21,6 +21,21 @@ const useLocalStorage = <K extends keyof LocalStorage>(
     defaultValue,
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: rule is bad
+  useEffect(() => {
+    switch (key) {
+      case "reminder-config": {
+        const dateProcessor = new DateProcessor(value.time.valueOf());
+        if (value.isEnabled) {
+          removeReminder();
+          setReminder(dateProcessor);
+        }
+        if (!value.isEnabled) {
+          removeReminder();
+        }
+      }
+    }
+  }, [value]);
 
   return [value, setValue] as const;
 };
