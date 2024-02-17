@@ -6,13 +6,14 @@ import { List, Plus, Settings, User2 } from "lucide-react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Button from "src/components/UI/Button";
 import DateContextProvider from "src/context/DateContext/DateContextProvider";
-import ReminderContextProvider from "src/context/ReminderContext/ReminderContextProvider";
+import useLocalStorage from "src/hooks/useLocalStorage";
 import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
 import CalendarScreen from "src/screens/CalendarScreen";
 import EntriesScreen from "src/screens/EntriesScreen";
 import SettingsScreen from "src/screens/SettingsScreen";
 import { colours, dimensions, fontSize, spacing } from "src/styles";
+import DateProcessor from "src/utils/DateProcessor";
 
 const Tab = createBottomTabNavigator();
 
@@ -85,10 +86,20 @@ const Stack = createStackNavigator<{
   Calendar: undefined;
 }>();
 
-const App = () => (
-  <SafeAreaProvider>
-    <DateContextProvider>
-      <ReminderContextProvider>
+const App = () => {
+  const [reminderConfig, setReminderConfig] =
+    useLocalStorage("reminder-config");
+  if (!reminderConfig.time) {
+    const dateProcessor = new DateProcessor();
+    dateProcessor.date.setHours(9, 0, 0);
+    setReminderConfig(prevConfig => ({
+      ...prevConfig,
+      time: dateProcessor.date,
+    }));
+  }
+  return (
+    <SafeAreaProvider>
+      <DateContextProvider>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
@@ -110,9 +121,9 @@ const App = () => (
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </ReminderContextProvider>
-    </DateContextProvider>
-  </SafeAreaProvider>
-);
+      </DateContextProvider>
+    </SafeAreaProvider>
+  );
+};
 
 export default App;

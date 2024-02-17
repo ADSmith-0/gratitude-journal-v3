@@ -1,10 +1,12 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { useContext } from "react";
+import { useState } from "react";
 import { View } from "react-native";
+import Button from "src/components/UI/Button";
 import Switch from "src/components/UI/Switch";
 import Text from "src/components/UI/Text";
-import { ReminderContext } from "src/context/ReminderContext/ReminderContext";
+import useLocalStorage from "src/hooks/useLocalStorage";
 import { styles } from "src/styles";
+import DateProcessor from "src/utils/DateProcessor";
 
 const {
   bg_offWhite,
@@ -21,7 +23,13 @@ const {
 } = styles;
 
 const SettingsScreen = () => {
-  const { reminder, dispatch } = useContext(ReminderContext);
+  const [reminderConfig, setReminderConfig] =
+    useLocalStorage("reminder-config");
+  // FIX: Make reminder open app on click
+
+  const [isTimePickerVisible, setIsTimePickerVisible] =
+    useState<boolean>(false);
+
   return (
     <View
       style={[
@@ -35,21 +43,45 @@ const SettingsScreen = () => {
         ph_8,
         mh_7,
       ]}>
+      <Text style={[styles.pl_3]}>Reminder</Text>
       <View style={[flex_row_center, justify_content_between]}>
-        <Text>Notifications</Text>
+        <Button
+          variant="tertiary"
+          buttonStyle={[styles.justify_content_start, styles.p_0]}
+          textStyle={[
+            styles.fs_l,
+            reminderConfig.isEnabled
+              ? styles.text_grey_100
+              : styles.text_grey_500,
+          ]}
+          title={new Date(reminderConfig.time).toTimeString().slice(0, 5)}
+          onPress={() => setIsTimePickerVisible(true)}
+          disabled={!reminderConfig.isEnabled}
+        />
         <Switch
-          isEnabled={reminder.isEnabled}
+          isEnabled={reminderConfig.isEnabled}
           onChange={isEnabled =>
-            dispatch({ action: isEnabled ? "enable" : "disable" })
+            setReminderConfig(prevConfig => ({
+              ...prevConfig,
+              isEnabled,
+            }))
           }
         />
+        {isTimePickerVisible && (
+          <DateTimePicker
+            mode="time"
+            value={new Date(reminderConfig.time)}
+            onChange={e => {
+              const dateProcessor = new DateProcessor(e.nativeEvent.timestamp);
+              setIsTimePickerVisible(false);
+              setReminderConfig(prevConfig => ({
+                ...prevConfig,
+                time: dateProcessor.date,
+              }));
+            }}
+          />
+        )}
       </View>
-      {/* FIX: change value to be reminder.time */}
-      {reminder.isEnabled && (
-        <View>
-          <DateTimePicker mode="time" value={new Date()} />
-        </View>
-      )}
     </View>
   );
 };
