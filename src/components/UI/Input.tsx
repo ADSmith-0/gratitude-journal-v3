@@ -12,6 +12,7 @@ const {
   mb_3,
   mb_4,
   pl_4,
+  pl_5,
   p_2,
   text_grey_100,
 } = styles;
@@ -22,27 +23,18 @@ type Props = {
 } & TextInputProps;
 
 const Input = ({ icon, label = "", onTouchStart, style, ...props }: Props) => (
-  <View>
+  <View style={style}>
     {label && <Text style={mb_3}>{label}</Text>}
     {icon ? (
       <View
-        style={[
-          flex_row_center,
-          bg_white,
-          border_1,
-          br_1,
-          mb_4,
-          pl_4,
-          p_2,
-          style,
-        ]}
+        style={[flex_row_center, bg_white, border_1, br_1, mb_4, pl_4, p_2]}
         onTouchStart={onTouchStart}>
         {icon}
         <TextInput style={[flex_1, text_grey_100, fs_m, pl_4]} {...props} />
       </View>
     ) : (
       <TextInput
-        style={[bg_white, text_grey_100, fs_m, border_1, br_1, style]}
+        style={[bg_white, text_grey_100, fs_m, border_1, br_1, pl_5]}
         {...props}
       />
     )}
