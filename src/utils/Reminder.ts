@@ -21,6 +21,7 @@ export const setReminder = async (dateProcessor: DateProcessor) => {
     dateProcessor.nextDay();
   }
 
+  // FIX: Error where date should be in the future
   const trigger: TimestampTrigger = {
     type: TriggerType.TIMESTAMP,
     timestamp: dateProcessor.date.getTime(),

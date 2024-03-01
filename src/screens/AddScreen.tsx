@@ -16,6 +16,8 @@ const AddScreen = () => {
     setEntry(EntriesStorage.get(date) ?? "");
   }, [date]);
 
+  // FIX: Regression, styling for input is messed up
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: bad rule
   useEffect(() => {
     const timeout = setTimeout(() => {
