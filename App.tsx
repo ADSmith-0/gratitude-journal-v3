@@ -72,6 +72,7 @@ const Tabs = () => (
       name="Account"
       component={AccountScreen}
       options={{
+        headerShown: false,
         tabBarIcon: ({ color, size }) => (
           <User2 color={color} size={size / 1.2} />
         ),
