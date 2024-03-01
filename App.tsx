@@ -2,9 +2,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { List, Plus, Settings, User2 } from "lucide-react-native";
+import { List, Plus, User2 } from "lucide-react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Button from "src/components/UI/Button";
+import SettingsButton from "src/components/Navigation/SettingsButton";
 import DateContextProvider from "src/context/DateContext/DateContextProvider";
 import useLocalStorage from "src/hooks/useLocalStorage";
 import AccountScreen from "src/screens/AccountScreen";
@@ -22,7 +22,7 @@ const Tabs = () => (
     sceneContainerStyle={{
       backgroundColor: colours.offWhite,
     }}
-    screenOptions={({ navigation }) => ({
+    screenOptions={() => ({
       tabBarActiveTintColor: colours.primary[100],
       tabBarInactiveTintColor: colours.primary[500],
       tabBarHideOnKeyboard: true,
@@ -37,18 +37,7 @@ const Tabs = () => (
         fontSize: fontSize.s,
         paddingBottom: spacing[6],
       },
-      headerRight: () => (
-        <Button
-          icon={(pressed: boolean) => (
-            <Settings
-              color={colours.grey[pressed ? 300 : 100]}
-              size={fontSize.l}
-            />
-          )}
-          variant="tertiary"
-          onPress={() => navigation.navigate("Settings")}
-        />
-      ),
+      headerRight: () => <SettingsButton />,
     })}>
     <Tab.Screen
       name="Add"
