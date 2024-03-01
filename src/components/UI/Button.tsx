@@ -9,11 +9,11 @@ import {
 } from "react-native";
 import { styles } from "src/styles";
 const {
-  align_self_end,
   bg_primary_100,
   bg_primary_200,
   bg_primary_300,
   bg_primary_700,
+  bg_primary_800,
   bg_transparent,
   br_1,
   flex_row_center,
@@ -53,7 +53,7 @@ const Button = ({
     },
     secondary: {
       normal: [bg_primary_700],
-      pressed: [bg_primary_100],
+      pressed: [bg_primary_800],
     },
     tertiary: {
       normal: [bg_transparent],
@@ -67,11 +67,11 @@ const Button = ({
   > = {
     primary: {
       normal: [text_primary_900],
-      pressed: [],
+      pressed: [text_primary_900],
     },
     secondary: {
       normal: [text_primary_100],
-      pressed: [],
+      pressed: [text_primary_100],
     },
     tertiary: {
       normal: [text_primary_100],
@@ -82,7 +82,6 @@ const Button = ({
   return (
     <Pressable
       style={({ pressed }) => [
-        w_3,
         flex_row_center,
         justify_content_center,
         pv_5,
