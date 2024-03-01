@@ -107,18 +107,11 @@ const App = () => {
               component={Tabs}
               options={{
                 headerShown: false,
+                cardStyle: { backgroundColor: colours.offWhite },
               }}
             />
-            <Stack.Screen
-              name="Settings"
-              component={SettingsScreen}
-              options={{ cardStyle: { backgroundColor: colours.offWhite } }}
-            />
-            <Stack.Screen
-              name="Calendar"
-              component={CalendarScreen}
-              options={{ cardStyle: { backgroundColor: colours.offWhite } }}
-            />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Calendar" component={CalendarScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </DateContextProvider>
