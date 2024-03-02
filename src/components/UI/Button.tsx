@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { styles } from "src/styles";
 const {
-  bg_primary_100,
   bg_primary_200,
   bg_primary_300,
   bg_primary_700,
@@ -24,7 +23,6 @@ const {
   text_primary_100,
   text_primary_500,
   text_primary_900,
-  w_3,
 } = styles;
 
 type Props = {

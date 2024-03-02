@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Settings } from "lucide-react-native";
 import Button from "src/components/UI/Button";
-import { colours, fontSize } from "src/styles";
+import { colours, fontSize, styles } from "src/styles";
 
 const SettingsButton = () => {
   const navigation =
@@ -14,6 +14,7 @@ const SettingsButton = () => {
 
   return (
     <Button
+      buttonStyle={styles.mr_5}
       icon={settingsIcon}
       variant="tertiary"
       onPress={() => navigation.navigate("Settings")}
