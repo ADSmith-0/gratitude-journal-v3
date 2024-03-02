@@ -3,21 +3,24 @@ import { useContext, useEffect, useState } from "react";
 import { Pressable, View } from "react-native";
 import Text from "src/components/UI/Text";
 import { DateContext } from "src/context/DateContext/DateContext";
+import { useNavigation } from "@react-navigation/native";
+import Button from "src/components/UI/Button";
+import DateProcessor from "src/utils/DateProcessor";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { colours, fontSize, styles } from "src/styles";
+
 const {
   align_items_center,
+  align_self_end,
   flex_1,
   flex_column_center,
   flex_row_center,
   justify_content_center,
   m_5,
-  mb_3,
+  mb_2,
   mt_3,
+  w_3,
 } = styles;
-import { useNavigation } from "@react-navigation/native";
-import Button from "src/components/UI/Button";
-import DateProcessor from "src/utils/DateProcessor";
-import { StackNavigationProp } from "@react-navigation/stack";
 
 const DaySelector = () => {
   const { date, dispatch } = useContext(DateContext);
@@ -66,6 +69,7 @@ const DaySelector = () => {
   return (
     <View style={[flex_row_center, justify_content_center]}>
       <Button
+        buttonStyle={[w_3, align_self_end]}
         icon={leftChevron}
         variant="tertiary"
         onPress={() => dispatch({ action: "prevDay" })}
@@ -73,7 +77,7 @@ const DaySelector = () => {
       <Pressable
         onPress={() => navigation.navigate("Calendar")}
         style={[flex_column_center, align_items_center, flex_1, mt_3]}>
-        <Text variant="secondary" style={[m_5, mb_3]}>
+        <Text variant="secondary" style={[m_5, mb_2]}>
           {currentDay}
         </Text>
         <Text size="l" style={m_5}>
@@ -81,6 +85,7 @@ const DaySelector = () => {
         </Text>
       </Pressable>
       <Button
+        buttonStyle={[w_3, align_self_end]}
         icon={rightChevron}
         variant="tertiary"
         onPress={() => dispatch({ action: "nextDay" })}

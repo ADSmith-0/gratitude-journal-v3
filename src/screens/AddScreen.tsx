@@ -5,7 +5,7 @@ import Input from "src/components/UI/Input";
 import { DateContext } from "src/context/DateContext/DateContext";
 import { colours, styles } from "src/styles";
 import EntriesStorage from "src/utils/EntriesStorage";
-const { flex_column, ph_1, pl_8, pt_6, br_0, border_0, bg_offWhite } = styles;
+const { flex_column, ph_1, ph_5, pt_8, br_0, border_0, bg_offWhite } = styles;
 
 const AddScreen = () => {
   const { date } = useContext(DateContext);
@@ -15,9 +15,6 @@ const AddScreen = () => {
   useEffect(() => {
     setEntry(EntriesStorage.get(date) ?? "");
   }, [date]);
-
-  // FIX: Regression, navigation buttons at the top are broken as well
-  // FIX: Regression, styling for input is messed up
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: bad rule
   useEffect(() => {
@@ -41,7 +38,8 @@ const AddScreen = () => {
         textAlignVertical="top"
         placeholder="I'm grateful for..."
         placeholderTextColor={colours.grey[600]}
-        style={[pl_8, pt_6, br_0, border_0, bg_offWhite]}
+        containerStyle={[ph_5, pt_8]}
+        style={[br_0, border_0, bg_offWhite]}
         value={entry}
         onChangeText={text => setEntry(text)}
       />
