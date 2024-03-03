@@ -3,6 +3,10 @@ import { StyleSheet } from "react-native";
 export const colours = {
   white: "hsl(0 0% 100%)",
   offWhite: "hsl(0 0% 99%)",
+  red: {
+    100: "hsl(0, 73.71%, 41.76%)",
+    900: "hsl(0, 96.3%, 89.41%)",
+  },
   grey: {
     "100": "hsl(30 2% 20%)",
     "200": "hsl(30 4% 29%)",
@@ -105,6 +109,7 @@ export const styles = StyleSheet.create({
   border_grey_700: { borderColor: colours.grey[700] },
   border_grey_800: { borderColor: colours.grey[800] },
   border_grey_900: { borderColor: colours.grey[900] },
+  border_red_100: { borderColor: colours.red[100] },
   fs_s: { fontSize: fontSize.s },
   fs_m: { fontSize: fontSize.m },
   fs_l: { fontSize: fontSize.l },
@@ -302,6 +307,7 @@ export const styles = StyleSheet.create({
   bg_grey_700: { backgroundColor: colours.grey[700] },
   bg_grey_800: { backgroundColor: colours.grey[800] },
   bg_grey_900: { backgroundColor: colours.grey[900] },
+  bg_red_900: { backgroundColor: colours.red[900] },
   text_bold: { fontWeight: "bold" },
   text_transparent: { color: "transparent" },
   text_grey_100: { color: colours.grey[100] },
@@ -313,6 +319,8 @@ export const styles = StyleSheet.create({
   text_grey_700: { color: colours.grey[700] },
   text_grey_800: { color: colours.grey[800] },
   text_grey_900: { color: colours.grey[900] },
+  text_red_100: { color: colours.red[100] },
+  text_red_900: { color: colours.red[900] },
   bg_white: { backgroundColor: colours.white },
   bg_primary_100: { backgroundColor: colours.primary[100] },
   bg_primary_200: { backgroundColor: colours.primary[200] },

@@ -25,12 +25,13 @@ const useLocalStorage = <K extends keyof LocalStorage>(
   useEffect(() => {
     switch (key) {
       case "reminder-config": {
-        const dateProcessor = new DateProcessor(value.time.valueOf());
-        if (value.isEnabled) {
+        const val = value as LocalStorage["reminder-config"];
+        const dateProcessor = new DateProcessor(val.time.valueOf());
+        if (val.isEnabled) {
           removeReminder();
           setReminder(dateProcessor);
         }
-        if (!value.isEnabled) {
+        if (!val.isEnabled) {
           removeReminder();
         }
       }

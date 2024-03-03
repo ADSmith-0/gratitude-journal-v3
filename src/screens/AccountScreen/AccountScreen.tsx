@@ -5,14 +5,34 @@ import AuthFragment from "./AuthFragment";
 import { createStackNavigator } from "@react-navigation/stack";
 import { colours } from "src/styles";
 import SettingsButton from "src/components/Navigation/SettingsButton";
+import ContentWrapper from "src/components/Screen/ContentWrapper";
+import Button from "src/components/UI/Button";
+import { useContext, useLayoutEffect } from "react";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { TabList } from "App";
+import { UserContext } from "src/context/UserContext/UserContext";
 
 const Stack = createStackNavigator();
 
-const AccountScreen = () => {
-  if (auth().currentUser) {
-    return <Text>{`Welcome ${auth().currentUser}`}</Text>;
-  }
-  return (
+type Props = {
+  navigation: BottomTabNavigationProp<TabList, "Account">;
+};
+
+const AccountScreen = ({ navigation }: Props) => {
+  const user = useContext(UserContext);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: !!user,
+    });
+  }, [user]);
+
+  return user ? (
+    <ContentWrapper>
+      <Text>{`Welcome ${user.email}`}</Text>
+      <Button title="Sign out" onPress={() => auth().signOut()} />
+    </ContentWrapper>
+  ) : (
     <Stack.Navigator
       screenOptions={{
         cardStyle: { backgroundColor: colours.offWhite },

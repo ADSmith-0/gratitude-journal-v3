@@ -6,6 +6,7 @@ import { List, Plus, User2 } from "lucide-react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import SettingsButton from "src/components/Navigation/SettingsButton";
 import DateContextProvider from "src/context/DateContext/DateContextProvider";
+import UserContextProvider from "src/context/UserContext/UserContextProvider";
 import useLocalStorage from "src/hooks/useLocalStorage";
 import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
@@ -15,7 +16,13 @@ import SettingsScreen from "src/screens/SettingsScreen";
 import { colours, dimensions, fontSize, spacing } from "src/styles";
 import DateProcessor from "src/utils/DateProcessor";
 
-const Tab = createBottomTabNavigator();
+export type TabList = {
+  Add: undefined;
+  Entries: undefined;
+  Account: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabList>();
 
 const Tabs = () => (
   <Tab.Navigator
@@ -61,7 +68,7 @@ const Tabs = () => (
       name="Account"
       component={AccountScreen}
       options={{
-        headerShown: false,
+        headerShown: true,
         tabBarIcon: ({ color, size }) => (
           <User2 color={color} size={size / 1.2} />
         ),
@@ -79,6 +86,7 @@ const Stack = createStackNavigator<{
 const App = () => {
   const [reminderConfig, setReminderConfig] =
     useLocalStorage("reminder-config");
+
   if (!reminderConfig.time) {
     const dateProcessor = new DateProcessor();
     dateProcessor.date.setHours(9, 0, 0);
@@ -87,23 +95,26 @@ const App = () => {
       time: dateProcessor.date,
     }));
   }
+
   return (
     <SafeAreaProvider>
       <DateContextProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Tabs"
-              component={Tabs}
-              options={{
-                headerShown: false,
-                cardStyle: { backgroundColor: colours.offWhite },
-              }}
-            />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="Calendar" component={CalendarScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <UserContextProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Tabs"
+                component={Tabs}
+                options={{
+                  headerShown: false,
+                  cardStyle: { backgroundColor: colours.offWhite },
+                }}
+              />
+              <Stack.Screen name="Settings" component={SettingsScreen} />
+              <Stack.Screen name="Calendar" component={CalendarScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </UserContextProvider>
       </DateContextProvider>
     </SafeAreaProvider>
   );
