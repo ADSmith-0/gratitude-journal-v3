@@ -27,12 +27,16 @@ const AccountScreen = ({ navigation }: Props) => {
     });
   }, [user]);
 
-  return user ? (
-    <ContentWrapper>
-      <Text>{`Welcome ${user.email}`}</Text>
-      <Button title="Sign out" onPress={() => auth().signOut()} />
-    </ContentWrapper>
-  ) : (
+  if (user) {
+    return (
+      <ContentWrapper>
+        <Text>{`Welcome ${user.email}`}</Text>
+        <Button title="Sign out" onPress={() => auth().signOut()} />
+      </ContentWrapper>
+    );
+  }
+
+  return (
     <Stack.Navigator
       screenOptions={{
         cardStyle: { backgroundColor: colours.offWhite },
