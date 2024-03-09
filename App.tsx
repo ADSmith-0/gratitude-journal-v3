@@ -87,7 +87,7 @@ const App = () => {
   const [reminderConfig, setReminderConfig] =
     useLocalStorage("reminder-config");
 
-  if (!reminderConfig.time) {
+  if (!reminderConfig?.time) {
     const dateProcessor = new DateProcessor();
     dateProcessor.date.setHours(9, 0, 0);
     setReminderConfig(prevConfig => ({
