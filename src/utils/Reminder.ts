@@ -17,14 +17,16 @@ export const setReminder = async (dateProcessor: DateProcessor) => {
     name: "Default Channel",
   });
 
-  if (dateProcessor?.date.valueOf() <= new Date().valueOf()) {
-    dateProcessor.nextDay();
-  }
+  const tomorrow = new DateProcessor().nextDay();
+  tomorrow.date.setHours(
+    dateProcessor.date.getHours(),
+    dateProcessor.date.getMinutes(),
+    0,
+  );
 
-  // FIX: Error where date should be in the future
   const trigger: TimestampTrigger = {
     type: TriggerType.TIMESTAMP,
-    timestamp: dateProcessor.date.getTime(),
+    timestamp: tomorrow.date.valueOf(),
     repeatFrequency: RepeatFrequency.DAILY,
     alarmManager: {
       allowWhileIdle: true,
