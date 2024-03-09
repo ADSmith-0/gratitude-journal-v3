@@ -101,13 +101,15 @@ const App = () => {
       <DateContextProvider>
         <UserContextProvider>
           <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+              screenOptions={{
+                cardStyle: { backgroundColor: colours.offWhite },
+              }}>
               <Stack.Screen
                 name="Tabs"
                 component={Tabs}
                 options={{
                   headerShown: false,
-                  cardStyle: { backgroundColor: colours.offWhite },
                 }}
               />
               <Stack.Screen name="Settings" component={SettingsScreen} />
