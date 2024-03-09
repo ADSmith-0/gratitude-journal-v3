@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useMMKVStorage } from "react-native-mmkv-storage";
 import DateProcessor from "src/utils/DateProcessor";
 import MMKV from "src/utils/MMKV";
@@ -11,6 +10,29 @@ export type LocalStorage = {
   };
 };
 
+MMKV.transactions.register("object", "beforewrite", (key, value) => {
+  if (key === "reminder-config") {
+    const currentConfig: LocalStorage["reminder-config"] =
+      MMKV.getMap("reminder-config");
+    const val = value as LocalStorage["reminder-config"];
+
+    if (
+      val.time.getHours() === new Date(currentConfig.time).getHours() &&
+      val.time.getMinutes() === new Date(currentConfig.time).getMinutes() &&
+      val.isEnabled === currentConfig.isEnabled
+    ) {
+      return;
+    }
+
+    if (val.isEnabled) {
+      const dateProcessor = new DateProcessor(val.time.valueOf());
+      setReminder(dateProcessor);
+    } else {
+      removeReminder();
+    }
+  }
+});
+
 const useLocalStorage = <K extends keyof LocalStorage>(
   key: K,
   defaultValue?: LocalStorage[K],
@@ -20,23 +42,6 @@ const useLocalStorage = <K extends keyof LocalStorage>(
     MMKV,
     defaultValue,
   );
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: rule is bad
-  useEffect(() => {
-    switch (key) {
-      case "reminder-config": {
-        const val = value as LocalStorage["reminder-config"];
-        const dateProcessor = new DateProcessor(val.time.valueOf());
-        if (val.isEnabled) {
-          removeReminder();
-          setReminder(dateProcessor);
-        }
-        if (!val.isEnabled) {
-          removeReminder();
-        }
-      }
-    }
-  }, [value]);
 
   return [value, setValue] as const;
 };
