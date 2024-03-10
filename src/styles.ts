@@ -71,7 +71,6 @@ export const styles = StyleSheet.create({
   flex_row_center: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
   },
   flex_column: { display: "flex", flexDirection: "column" },
@@ -310,6 +309,7 @@ export const styles = StyleSheet.create({
   bg_grey_700: { backgroundColor: colours.grey[700] },
   bg_grey_800: { backgroundColor: colours.grey[800] },
   bg_grey_900: { backgroundColor: colours.grey[900] },
+  bg_red_100: { backgroundColor: colours.red[100] },
   bg_red_900: { backgroundColor: colours.red[900] },
   text_bold: { fontWeight: "bold" },
   text_transparent: { color: "transparent" },
