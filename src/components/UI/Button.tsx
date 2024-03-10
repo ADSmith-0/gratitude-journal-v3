@@ -13,6 +13,8 @@ const {
   bg_primary_300,
   bg_primary_700,
   bg_primary_800,
+  bg_red_100,
+  bg_red_900,
   bg_transparent,
   br_1,
   flex_row_center,
@@ -20,15 +22,20 @@ const {
   justify_content_center,
   pv_5,
   ph_3,
+  text_grey_100,
+  text_grey_300,
   text_primary_100,
   text_primary_500,
   text_primary_900,
+  text_red_100,
+  text_red_900,
 } = styles;
 
 type Props = {
   title?: string;
   icon?: (pressed: boolean) => ReactElement;
   variant?: "primary" | "secondary" | "tertiary";
+  flavour?: "normal" | "destructive";
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
 } & PressableProps;
@@ -37,43 +44,80 @@ const Button = ({
   title,
   icon,
   variant = "primary",
+  flavour = "normal",
   buttonStyle,
   textStyle,
   ...props
 }: Props) => {
   const buttonStyles: Record<
     typeof variant,
-    Record<"normal" | "pressed", StyleProp<ViewStyle>>
+    Record<typeof flavour, Record<"normal" | "pressed", StyleProp<ViewStyle>>>
   > = {
     primary: {
-      normal: [bg_primary_300],
-      pressed: [bg_primary_200],
+      normal: {
+        normal: [bg_primary_300],
+        pressed: [bg_primary_200],
+      },
+      destructive: {
+        normal: [bg_red_100],
+        pressed: [bg_red_100],
+      },
     },
     secondary: {
-      normal: [bg_primary_700],
-      pressed: [bg_primary_800],
+      normal: {
+        normal: [bg_primary_700],
+        pressed: [bg_primary_800],
+      },
+      destructive: {
+        normal: [bg_red_900],
+        pressed: [bg_red_900],
+      },
     },
     tertiary: {
-      normal: [bg_transparent],
-      pressed: [],
+      normal: {
+        normal: [bg_transparent],
+        pressed: [bg_transparent],
+      },
+      destructive: {
+        normal: [bg_transparent],
+        pressed: [bg_transparent],
+      },
     },
   };
 
   const textStyles: Record<
     typeof variant,
-    Record<"normal" | "pressed", StyleProp<TextStyle>>
+    Record<typeof flavour, Record<"normal" | "pressed", StyleProp<TextStyle>>>
   > = {
     primary: {
-      normal: [text_primary_900],
-      pressed: [text_primary_900],
+      normal: {
+        normal: [text_primary_900],
+        pressed: [text_primary_900],
+      },
+      destructive: {
+        normal: [text_red_900],
+        pressed: [text_red_900],
+      },
     },
     secondary: {
-      normal: [text_primary_100],
-      pressed: [text_primary_100],
+      normal: {
+        normal: [text_primary_100],
+        pressed: [text_primary_100],
+      },
+      destructive: {
+        normal: [text_grey_100],
+        pressed: [text_grey_300],
+      },
     },
     tertiary: {
-      normal: [text_primary_100],
-      pressed: [text_primary_500],
+      normal: {
+        normal: [text_primary_100],
+        pressed: [text_primary_500],
+      },
+      destructive: {
+        normal: [text_red_100],
+        pressed: [text_red_900],
+      },
     },
   };
 
@@ -85,7 +129,7 @@ const Button = ({
         pv_5,
         ph_3,
         br_1,
-        buttonStyles[variant][pressed ? "pressed" : "normal"],
+        buttonStyles[variant][flavour][pressed ? "pressed" : "normal"],
         buttonStyle,
       ]}
       {...props}>
@@ -96,7 +140,7 @@ const Button = ({
             <Text
               style={[
                 fs_m,
-                textStyles[variant][pressed ? "pressed" : "normal"],
+                textStyles[variant][flavour][pressed ? "pressed" : "normal"],
                 textStyle,
               ]}>
               {title}
