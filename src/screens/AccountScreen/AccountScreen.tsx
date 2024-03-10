@@ -11,6 +11,7 @@ import { useContext, useLayoutEffect } from "react";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { TabList } from "App";
 import { UserContext } from "src/context/UserContext/UserContext";
+import LoginScreen from "./LoginScreen";
 
 const Stack = createStackNavigator();
 
@@ -28,12 +29,7 @@ const AccountScreen = ({ navigation }: Props) => {
   }, [user]);
 
   if (user) {
-    return (
-      <ContentWrapper>
-        <Text>{`Welcome ${user.email}`}</Text>
-        <Button title="Sign out" onPress={() => auth().signOut()} />
-      </ContentWrapper>
-    );
+    return <LoginScreen user={user} />;
   }
 
   return (
