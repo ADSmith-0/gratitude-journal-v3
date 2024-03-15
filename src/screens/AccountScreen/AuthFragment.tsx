@@ -1,13 +1,12 @@
 import { View } from "react-native";
 import Input from "src/components/UI/Input";
 import Button from "src/components/UI/Button";
-import { colours, fontSize, styles } from "src/styles";
-import { useNavigation } from "@react-navigation/native";
+import { styles } from "src/styles";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useState } from "react";
-import Text from "src/components/UI/Text";
 import auth from "@react-native-firebase/auth";
-import { AlertCircle } from "lucide-react-native";
+import Banner from "src/components/UI/Banner";
 
 type Props = {
   type: "Sign up" | "Login";
@@ -28,6 +27,17 @@ const AuthFragment = ({ type }: Props) => {
 
   const [error, setError] = useState<string | undefined>();
 
+  const getErrorMessageFromCode = (errorCode: string): string => {
+    switch (errorCode) {
+      case "auth/invalid-credential": {
+        return "Could not log in. Please check your email and password and try again";
+      }
+      default: {
+        return "";
+      }
+    }
+  };
+
   const handleSubmit = async () => {
     if (!email || !password) {
       return;
@@ -37,22 +47,16 @@ const AuthFragment = ({ type }: Props) => {
       case "Login": {
         await auth()
           .signInWithEmailAndPassword(email, password)
-          .then(() => setError(""))
           .catch(err => {
-            console.log(err);
-            const message: string = err.message;
-            setError(message.replace(/\[.*\] /, ""));
+            setError(getErrorMessageFromCode(err.code));
           });
         break;
       }
       case "Sign up": {
         await auth()
           .createUserWithEmailAndPassword(email, password)
-          .then(() => setError(""))
           .catch(err => {
-            console.log(err);
-            const message: string = err.message;
-            setError(message.replace(/\[.*\] /, ""));
+            setError(getErrorMessageFromCode(err.code));
           });
         break;
       }
@@ -75,22 +79,7 @@ const AuthFragment = ({ type }: Props) => {
         value={password}
         onChangeText={text => setPassword(text)}
       />
-      {error && (
-        <View
-          style={[
-            styles.bg_red_900,
-            styles.border_1,
-            styles.br_1,
-            styles.border_red_100,
-            styles.pv_3,
-            styles.ph_5,
-            styles.flex_row_center,
-            styles.gap_4,
-          ]}>
-          <AlertCircle color={colours.grey[100]} size={fontSize.m} />
-          <Text>{error}</Text>
-        </View>
-      )}
+      {error && <Banner message={error} />}
       <Button
         title={type}
         onPress={handleSubmit}
