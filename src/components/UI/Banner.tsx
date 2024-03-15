@@ -5,8 +5,16 @@ import { colours, fontSize, styles } from "src/styles";
 import { useEffect, useRef } from "react";
 import { XCircle } from "lucide-react-native";
 
-const { bg_red_900, border_red_100, br_1, bw_1, flex_row_center, gap_2, p_3 } =
-  styles;
+const {
+  bg_red_900,
+  border_red_100,
+  br_1,
+  bw_1,
+  flex_row_center,
+  gap_2,
+  p_4,
+  ph_4,
+} = styles;
 
 type Props = ViewProps & {
   variant?: "error";
@@ -39,7 +47,7 @@ const Banner = ({ message, variant = "error" }: Props) => {
         border_red_100,
         bg_red_900,
         bw_1,
-        p_3,
+        p_4,
         {
           left: leftAnimation,
           opacity: fadeAnimation,
@@ -48,7 +56,7 @@ const Banner = ({ message, variant = "error" }: Props) => {
       {variant === "error" && (
         <>
           <XCircle color={colours.red[100]} size={fontSize.l} />
-          <Text>{message}</Text>
+          <Text style={ph_4}>{message}</Text>
         </>
       )}
     </Animated.View>
