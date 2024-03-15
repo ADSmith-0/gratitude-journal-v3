@@ -15,7 +15,7 @@ type Props = {
 
 const LoginScreen = ({ user }: Props) => {
   const [entriesCount, setEntriesCount] = useState<number>(0);
-  const [displayBanner, setDisplayBanner] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
 
   useFocusEffect(() => {
     setEntriesCount(
@@ -44,8 +44,12 @@ const LoginScreen = ({ user }: Props) => {
         </Text>
         {user.metadata.creationTime && (
           <Text>
-            Account created on{" "}
-            {new Date(user.metadata.creationTime).toLocaleDateString("en-GB")}
+            Created on{" "}
+            {
+              new Date(user.metadata.creationTime)
+                .toLocaleDateString("en-GB")
+                .split("T")[0]
+            }
           </Text>
         )}
       </Box>
@@ -54,9 +58,13 @@ const LoginScreen = ({ user }: Props) => {
         title="Delete account"
         variant="secondary"
         flavour="destructive"
-        onPress={() => setDisplayBanner(prev => !prev)}
+        onPress={() =>
+          user
+            .delete()
+            .catch(err => setError(err.message.replace(/\[.*\] /, "")))
+        }
       />
-      {displayBanner && <Banner message="Banner" />}
+      {error && <Banner message={error} />}
     </ContentWrapper>
   );
 };
