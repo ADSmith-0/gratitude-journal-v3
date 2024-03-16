@@ -2,7 +2,7 @@ import { View } from "react-native";
 import Input from "src/components/UI/Input";
 import Button from "src/components/UI/Button";
 import { styles } from "src/styles";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useState } from "react";
 import auth from "@react-native-firebase/auth";
