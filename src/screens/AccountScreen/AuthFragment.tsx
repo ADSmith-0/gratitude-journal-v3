@@ -12,8 +12,17 @@ type Props = {
   type: "Sign up" | "Login";
 };
 
-const { flex_column_center, border_grey_700, btw_1, mh_10, mt_10, pt_8 } =
-  styles;
+const {
+  border_grey_700,
+  btw_1,
+  flex_column_center,
+  gap_7,
+  mb_4,
+  mb_5,
+  mh_10,
+  mt_10,
+  pt_8,
+} = styles;
 
 const AuthFragment = ({ type }: Props) => {
   const navigation =
@@ -27,13 +36,16 @@ const AuthFragment = ({ type }: Props) => {
 
   const [error, setError] = useState<string | undefined>();
 
-  const getErrorMessageFromCode = (errorCode: string): string => {
-    switch (errorCode) {
+  const getErrorMessageFromCode = (firebaseError: {
+    code: string;
+    message: string;
+  }): string => {
+    switch (firebaseError.code) {
       case "auth/invalid-credential": {
         return "Could not log in. Please check your email and password and try again";
       }
       default: {
-        return "";
+        return firebaseError.message.replace(/\[.*\] /, "");
       }
     }
   };
@@ -48,7 +60,7 @@ const AuthFragment = ({ type }: Props) => {
         await auth()
           .signInWithEmailAndPassword(email, password)
           .catch(err => {
-            setError(getErrorMessageFromCode(err.code));
+            setError(getErrorMessageFromCode(err));
           });
         break;
       }
@@ -56,16 +68,15 @@ const AuthFragment = ({ type }: Props) => {
         await auth()
           .createUserWithEmailAndPassword(email, password)
           .catch(err => {
-            setError(getErrorMessageFromCode(err.code));
+            setError(getErrorMessageFromCode(err));
           });
         break;
       }
     }
   };
 
-  // FIX: Remove the styles. from here
   return (
-    <View style={[flex_column_center, mh_10, styles.gap_7, mt_10]}>
+    <View style={[flex_column_center, mh_10, gap_7, mt_10]}>
       <Input
         label="Email"
         keyboardType="email-address"
@@ -75,16 +86,12 @@ const AuthFragment = ({ type }: Props) => {
       <Input
         label="Password"
         secureTextEntry
-        style={styles.mb_5}
+        style={mb_5}
         value={password}
         onChangeText={text => setPassword(text)}
       />
       {error && <Banner message={error} />}
-      <Button
-        title={type}
-        onPress={handleSubmit}
-        buttonStyle={[styles.mt_10, styles.mb_4]}
-      />
+      <Button title={type} onPress={handleSubmit} buttonStyle={[mt_10, mb_4]} />
       {type === "Login" && (
         <View style={[border_grey_700, pt_8, btw_1]}>
           <Button
