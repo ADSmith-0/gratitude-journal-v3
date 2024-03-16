@@ -26,7 +26,7 @@ export const setReminder = async (dateProcessor: DateProcessor) => {
 
   const trigger: TimestampTrigger = {
     type: TriggerType.TIMESTAMP,
-    timestamp: tomorrow.date.valueOf(),
+    timestamp: tomorrow.date.getTime(),
     repeatFrequency: RepeatFrequency.DAILY,
     alarmManager: {
       allowWhileIdle: true,
