@@ -39,6 +39,9 @@ const Tabs = () => (
       drawerLabelStyle: {
         fontSize: fontSize.m,
       },
+      sceneContainerStyle: {
+        backgroundColor: colours.offWhite,
+      },
       headerRight: () => <SettingsButton />,
       headerLeft: () => (
         <Button
