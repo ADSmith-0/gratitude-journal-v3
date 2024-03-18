@@ -9,6 +9,8 @@ import { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import Banner from "src/components/UI/Banner";
 
+const { bg_white, flex_column_center, gap_4, mh_10, mt_8 } = styles;
+
 type Props = {
   user: FirebaseAuthTypes.User;
 };
@@ -27,18 +29,12 @@ const LoginScreen = ({ user }: Props) => {
   });
 
   return (
-    <ContentWrapper
-      style={[
-        styles.flex_column_center,
-        styles.mt_8,
-        styles.mh_10,
-        styles.gap_4,
-      ]}>
+    <ContentWrapper style={[flex_column_center, mt_8, mh_10, gap_4]}>
       <Text variant="secondary" size="s">
         Logged in as
       </Text>
       <Text size="l">{user.email}</Text>
-      <Box style={[styles.bg_white, styles.gap_4]}>
+      <Box style={[bg_white, gap_4]}>
         <Text>
           {entriesCount} {entriesCount > 1 ? "Entries" : "Entry"}
         </Text>

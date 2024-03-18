@@ -4,6 +4,8 @@ import { Settings } from "lucide-react-native";
 import Button from "src/components/UI/Button";
 import { colours, fontSize, styles } from "src/styles";
 
+const { mr_5 } = styles;
+
 const SettingsButton = () => {
   const navigation =
     useNavigation<StackNavigationProp<{ Settings: undefined }, "Settings">>();
@@ -14,7 +16,7 @@ const SettingsButton = () => {
 
   return (
     <Button
-      buttonStyle={styles.mr_5}
+      buttonStyle={mr_5}
       icon={settingsIcon}
       variant="tertiary"
       onPress={() => navigation.navigate("Settings")}
