@@ -55,7 +55,7 @@ const Tabs = () => (
       name="Add"
       component={AddScreen}
       options={{
-        drawerIcon: ({ color, size }: { color: any; size: number }) => (
+        drawerIcon: ({ color, size }) => (
           <Plus color={color} size={size / 1.3} />
         ),
       }}
