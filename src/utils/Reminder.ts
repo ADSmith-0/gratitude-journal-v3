@@ -17,8 +17,13 @@ export const setReminder = async (dateProcessor: DateProcessor) => {
     name: "Default Channel",
   });
 
-  const tomorrow = new DateProcessor().nextDay();
-  tomorrow.date.setHours(
+  const today = new DateProcessor();
+
+  if (dateProcessor.date.valueOf() < Date.now()) {
+    today.nextDay();
+  }
+
+  today.date.setHours(
     dateProcessor.date.getHours(),
     dateProcessor.date.getMinutes(),
     0,
@@ -26,7 +31,7 @@ export const setReminder = async (dateProcessor: DateProcessor) => {
 
   const trigger: TimestampTrigger = {
     type: TriggerType.TIMESTAMP,
-    timestamp: tomorrow.date.getTime(),
+    timestamp: today.date.getTime(),
     repeatFrequency: RepeatFrequency.DAILY,
     alarmManager: {
       allowWhileIdle: true,
