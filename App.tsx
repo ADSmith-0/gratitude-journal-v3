@@ -7,15 +7,14 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import SettingsButton from "src/components/Navigation/SettingsButton";
 import Button from "src/components/UI/Button";
 import DateContextProvider from "src/context/DateContext/DateContextProvider";
+import { ReminderContextProvider } from "src/context/ReminderContext/ReminderContextProvider";
 import UserContextProvider from "src/context/UserContext/UserContextProvider";
-import useLocalStorage from "src/hooks/useLocalStorage";
 import AccountScreen from "src/screens/AccountScreen";
 import AddScreen from "src/screens/AddScreen";
 import CalendarScreen from "src/screens/CalendarScreen";
 import EntriesScreen from "src/screens/EntriesScreen";
 import SettingsScreen from "src/screens/SettingsScreen";
 import { colours, fontSize, spacing } from "src/styles";
-import DateProcessor from "src/utils/DateProcessor";
 
 export type TabList = {
   Add: undefined;
@@ -87,23 +86,11 @@ const Stack = createStackNavigator<{
   Calendar: undefined;
 }>();
 
-const App = () => {
-  const [reminderConfig, setReminderConfig] =
-    useLocalStorage("reminder-config");
-
-  if (!reminderConfig?.time) {
-    const dateProcessor = new DateProcessor();
-    dateProcessor.date.setHours(9, 0, 0);
-    setReminderConfig(prevConfig => ({
-      ...prevConfig,
-      time: dateProcessor.date,
-    }));
-  }
-
-  return (
-    <SafeAreaProvider>
-      <DateContextProvider>
-        <UserContextProvider>
+const App = () => (
+  <SafeAreaProvider>
+    <DateContextProvider>
+      <UserContextProvider>
+        <ReminderContextProvider>
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{
@@ -120,10 +107,10 @@ const App = () => {
               <Stack.Screen name="Calendar" component={CalendarScreen} />
             </Stack.Navigator>
           </NavigationContainer>
-        </UserContextProvider>
-      </DateContextProvider>
-    </SafeAreaProvider>
-  );
-};
+        </ReminderContextProvider>
+      </UserContextProvider>
+    </DateContextProvider>
+  </SafeAreaProvider>
+);
 
 export default App;

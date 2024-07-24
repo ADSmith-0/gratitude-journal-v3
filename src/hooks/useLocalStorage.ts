@@ -1,46 +1,25 @@
 import { useMMKVStorage } from "react-native-mmkv-storage";
-import DateProcessor from "src/utils/DateProcessor";
+import { ReminderConfig } from "src/context/ReminderContext/ReminderContext";
 import MMKV from "src/utils/MMKV";
-import { removeReminder, setReminder } from "src/utils/Reminder";
 
 export type LocalStorage = {
-  "reminder-config": {
-    isEnabled: boolean;
-    time: Date;
+  "reminder-config": Omit<ReminderConfig, "callAt"> & {
+    callAt: string;
   };
 };
 
-MMKV.transactions.register("object", "beforewrite", (key, value) => {
-  if (key === "reminder-config") {
-    const currentConfig: LocalStorage["reminder-config"] =
-      MMKV.getMap("reminder-config");
-    const val = value as LocalStorage["reminder-config"];
+const defaultValues: LocalStorage = {
+  "reminder-config": {
+    isEnabled: false,
+    callAt: new Date().toUTCString(),
+  },
+};
 
-    if (
-      val.time.getHours() === new Date(currentConfig.time).getHours() &&
-      val.time.getMinutes() === new Date(currentConfig.time).getMinutes() &&
-      val.isEnabled === currentConfig.isEnabled
-    ) {
-      return;
-    }
-
-    if (val.isEnabled) {
-      const dateProcessor = new DateProcessor(val.time.valueOf());
-      setReminder(dateProcessor);
-    } else {
-      removeReminder();
-    }
-  }
-});
-
-const useLocalStorage = <K extends keyof LocalStorage>(
-  key: K,
-  defaultValue?: LocalStorage[K],
-) => {
+const useLocalStorage = <K extends keyof LocalStorage>(key: K) => {
   const [value, setValue] = useMMKVStorage<LocalStorage[K]>(
     key,
     MMKV,
-    defaultValue,
+    defaultValues[key] ?? undefined,
   );
 
   return [value, setValue] as const;
