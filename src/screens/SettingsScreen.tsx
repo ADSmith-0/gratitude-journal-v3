@@ -1,10 +1,10 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { View } from "react-native";
 import Button from "src/components/UI/Button";
 import Switch from "src/components/UI/Switch";
 import Text from "src/components/UI/Text";
-import useLocalStorage from "src/hooks/useLocalStorage";
+import { ReminderContext } from "src/context/ReminderContext/ReminderContext";
 import { styles } from "src/styles";
 import DateProcessor from "src/utils/DateProcessor";
 
@@ -29,9 +29,14 @@ const {
 } = styles;
 
 const SettingsScreen = () => {
-  const [reminderConfig, setReminderConfig] =
-    useLocalStorage("reminder-config");
+  const { reminderConfig, dispatchUpdateReminderConfig } =
+    useContext(ReminderContext);
   // FIX: Make reminder open app on click
+
+  console.log(
+    "settings screen reminderConfig:",
+    reminderConfig.callAt.date instanceof Date,
+  );
 
   const [isTimePickerVisible, setIsTimePickerVisible] =
     useState<boolean>(false);
@@ -58,30 +63,28 @@ const SettingsScreen = () => {
             fs_l,
             reminderConfig.isEnabled ? text_grey_100 : text_grey_500,
           ]}
-          title={new Date(reminderConfig.time).toTimeString().slice(0, 5)}
+          title={reminderConfig.callAt.date.toTimeString().slice(0, 5)}
           onPress={() => setIsTimePickerVisible(true)}
           disabled={!reminderConfig.isEnabled}
         />
         <Switch
           isEnabled={reminderConfig.isEnabled}
           onChange={isEnabled =>
-            setReminderConfig(prevConfig => ({
-              ...prevConfig,
-              isEnabled,
-            }))
+            dispatchUpdateReminderConfig({
+              action: isEnabled ? "enable" : "disable",
+            })
           }
         />
         {isTimePickerVisible && (
           <DateTimePicker
             mode="time"
-            value={new Date(reminderConfig.time)}
+            value={reminderConfig.callAt.date}
             onChange={e => {
-              const dateProcessor = new DateProcessor(e.nativeEvent.timestamp);
               setIsTimePickerVisible(false);
-              setReminderConfig(prevConfig => ({
-                ...prevConfig,
-                time: dateProcessor.date,
-              }));
+              dispatchUpdateReminderConfig({
+                action: "updateCallAt",
+                newCallAt: new DateProcessor(e.nativeEvent.timestamp),
+              });
             }}
           />
         )}

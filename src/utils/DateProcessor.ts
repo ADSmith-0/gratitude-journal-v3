@@ -1,7 +1,7 @@
 import { DateString, MonthYear } from "src/types";
 
 class DateProcessor {
-  public date;
+  public date: Date;
 
   constructor(epoch?: number) {
     if (epoch) {

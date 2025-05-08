@@ -1,8 +1,16 @@
 import { StyleSheet, View } from "react-native";
 import useCalendarDates from "src/hooks/useCalendarDates";
-import { styles } from "src/styles";
 import { days } from "src/utils/globals";
 import Text from "src/components/UI/Text";
+import Button from "src/components/UI/Button";
+import { DateTag } from "src/types";
+import { DateContext } from "src/context/DateContext/DateContext";
+import { useContext } from "react";
+import DateProcessor from "src/utils/DateProcessor";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { styles } from "src/styles";
+
 const {
   bg_primary_800,
   flex_row_center,
@@ -20,13 +28,6 @@ const {
   text_grey_300,
   text_grey_800,
 } = styles;
-import Button from "src/components/UI/Button";
-import { DateTag } from "src/types";
-import { DateContext } from "src/context/DateContext/DateContext";
-import { useContext } from "react";
-import DateProcessor from "src/utils/DateProcessor";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 
 const { row } = StyleSheet.create({
   row: {
